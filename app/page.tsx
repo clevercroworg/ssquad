@@ -5,6 +5,7 @@ import HeroSectionV1 from './components/hero/HeroSectionV1';
 import TrustSection from './components/sections/TrustSection';
 import SolutionsSection from './components/sections/SolutionsSection';
 import StrategicDefenceSection from './components/sections/StrategicDefenceSection';
+import QuantumSafeSection from './components/sections/QuantumSafeSection';
 import IndustryExpertiseSection from './components/sections/IndustryExpertiseSection';
 import PlatformSpotlightSection from './components/sections/PlatformSpotlightSection';
 import InsightsSection from './components/sections/InsightsSection';
@@ -37,8 +38,9 @@ export default function Home() {
       <TrustSection />
       <SolutionsSection />
       <StrategicDefenceSection />
-      <IndustryExpertiseSection />
+      <QuantumSafeSection />
       <PlatformSpotlightSection />
+      <IndustryExpertiseSection />
       <InsightsSection />
       <CertificationsSection />
       <ContactCTASection />

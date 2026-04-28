@@ -3,10 +3,28 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { managementData } from '@/app/data/management';
-import { useRef } from 'react';
+import { useRef, useEffect, useState } from 'react';
 
 export default function LeadershipSection() {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [isHovered, setIsHovered] = useState(false);
+
+  useEffect(() => {
+    if (isHovered) return;
+    
+    const interval = setInterval(() => {
+      if (scrollRef.current) {
+        const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+        if (scrollLeft + clientWidth >= scrollWidth - 10) {
+          scrollRef.current.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          scrollRef.current.scrollBy({ left: 250, behavior: 'smooth' });
+        }
+      }
+    }, 2000);
+
+    return () => clearInterval(interval);
+  }, [isHovered]);
 
   const scrollLeft = () => {
     if (scrollRef.current) {
@@ -51,33 +69,33 @@ export default function LeadershipSection() {
           </div>
         </div>
 
-        <div className="relative">
-          <div 
+        <div className="relative" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+            <div 
             ref={scrollRef}
-            className="flex overflow-x-auto gap-8 sm:gap-12 pb-8 pt-4 snap-x snap-mandatory hide-scrollbar justify-start"
+            className="flex overflow-x-auto gap-4 sm:gap-8 md:gap-12 pb-8 pt-4 snap-x snap-mandatory hide-scrollbar justify-start"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
             {managementData.map((leader, idx) => (
-              <div key={idx} className="w-[180px] md:w-[200px] snap-start flex-shrink-0 text-center">
+              <div key={idx} className="w-[calc(50%-8px)] sm:w-[180px] md:w-[200px] snap-start flex-shrink-0 text-center">
                 <Link href={`/management/${leader.id}`} className="block group h-full">
                   <div className="reveal flex flex-col items-center">
                      {/* Small Circular Photo matching cyfirma reference but with Ssquad light styling */}
-                     <div className="relative w-36 h-36 md:w-44 md:h-44 mb-6 rounded-full overflow-hidden bg-slate-100 ring-4 ring-slate-50 group-hover:ring-ssg-red/20 transition-all duration-500 mx-auto shadow-sm">
+                     <div className="relative w-32 h-32 sm:w-36 sm:h-36 md:w-44 md:h-44 mb-4 sm:mb-6 rounded-full overflow-hidden bg-slate-100 ring-4 ring-slate-50 group-hover:ring-ssg-red/20 transition-all duration-500 mx-auto shadow-sm">
                         <Image 
                            src={leader.image}
                            alt={leader.name}
                            fill
                            className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
-                           style={{ objectPosition: leader.imagePosition || 'center top' }}
+                           style={{ objectPosition: leader.imagePosition || 'center' }}
                            unoptimized
                         />
                      </div>
                      
-                     <h3 className="font-heading font-bold text-lg text-slate-900 group-hover:text-ssg-red transition-colors">{leader.name}</h3>
-                     <p className="text-ssg-red font-medium text-xs sm:text-sm mt-2 mb-4 line-clamp-2">{leader.title}</p>
+                     <h3 className="font-heading font-bold text-base sm:text-lg text-slate-900 group-hover:text-ssg-red transition-colors leading-tight">{leader.name}</h3>
+                     <p className="text-ssg-red font-medium text-[11px] sm:text-xs md:text-sm mt-1.5 sm:mt-2 mb-4 line-clamp-2">{leader.title}</p>
                      
                      <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 group-hover:bg-[#0077b5] group-hover:text-white transition-all duration-300 mx-auto">
-                        <i className="ph-fill ph-linkedin-logo text-lg"></i>
+                        <i className="ph-fill ph-linkedin-logo text-base sm:text-lg"></i>
                      </div>
                   </div>
                 </Link>

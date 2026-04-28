@@ -25,7 +25,7 @@ export default function ContactPage() {
   }, []);
 
   const locations = [
-    { country: "Singapore", code: "sg", company: "Ssquad Pte Ltd (HQ)", address: "1 Ubi View, #04-05 Focus One, Singapore 408555." },
+    { country: "Singapore", code: "sg", company: "Ssquad Pte Ltd (HQ)", address: "71 Robinson Rd, Singapore 068895" },
     { country: "Australia", code: "au", company: "Ssquad Pty Ltd", address: "Office 4, 10 Welch Street, Southport QLD 4215, Australia" },
     { country: "Hong Kong", code: "hk", company: "Ssquad Limited", address: "No 5, 17/F Strand 50, 50 Bonham Strand, Sheung Wan, Hong Kong." },
     { country: "India", code: "in", company: "Ssquad Information Systems Pvt Ltd", address: "Silver Soft Tech Park, Whitefield Main Road, 1st Floor, EPIP 1st Phase, Bangalore-560066" },

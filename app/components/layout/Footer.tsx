@@ -30,7 +30,7 @@ export default function Footer() {
             <ul>
               <li><strong>Phone:</strong><br />+603 2276 5856</li>
               <li><strong>Email:</strong><br />sales@ssquad.com</li>
-              <li><strong>Address:</strong><br />1 Ubi View, #04-05 Focus One, Singapore 408555.</li>
+              <li><strong>Address:</strong><br />71 Robinson Rd, Singapore 068895</li>
             </ul>
           </div>
           <div className="lg:col-span-2 footer-col">

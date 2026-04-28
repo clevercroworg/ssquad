@@ -79,7 +79,7 @@ export default function PrivacyPage() {
           <div className="bg-slate-50 p-6 rounded-2xl border border-slate-100">
             <p className="font-bold text-slate-900">S-squad Global Privacy Team</p>
             <p className="text-slate-600">Email: dpo@ssquad.com</p>
-            <p className="text-slate-600">Address: 1 Ubi View, #04-05 Focus One, Singapore 408555.</p>
+            <p className="text-slate-600">Address: 71 Robinson Rd, Singapore 068895</p>
           </div>
         </div>
       </section>

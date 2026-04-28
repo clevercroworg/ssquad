@@ -14,6 +14,7 @@ export const managementData: ManagementProfile[] = [
     name: "Arun Gopakumar",
     title: "Chief Executive Officer",
     image: "/management/arun.jpg",
+    imagePosition: "30% center",
     linkedin: "#",
     bio: [
       "Arun is the Managing Director of Ssquad Global. Driven by his passion for building a world-class IT company to offer innovative solutions to public and private organizations, he founded Ssquad Global in 2012.",
@@ -53,6 +54,7 @@ export const managementData: ManagementProfile[] = [
     name: "Ravi Prakasha",
     title: "Director - Technical Services",
     image: "/management/ravi.jpg",
+    imagePosition: "48% center",
     linkedin: "#",
     bio: [
       "Ravi Prakasha is an accomplished and experienced Technical Services Director with a passion for leveraging technology to drive business growth. With a solid background in computer knowledge and over 17+ years of professional experience, Ravi has established himself as a respected leader in the field.",
