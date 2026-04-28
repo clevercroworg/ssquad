@@ -35,7 +35,7 @@ export default function AboutSection() {
             
             <div className="mt-10 flex items-center gap-6 reveal" style={{ transitionDelay: '200ms' }}>
                <div className="flex flex-col">
-                  <span className="text-4xl font-heading font-bold text-ssg-red">12+</span>
+                  <span className="text-4xl font-heading font-bold text-ssg-red">14+</span>
                   <span className="text-sm text-slate-500 font-medium uppercase tracking-wider mt-1">Years Experience</span>
                </div>
                <div className="w-[1px] h-12 bg-slate-200"></div>

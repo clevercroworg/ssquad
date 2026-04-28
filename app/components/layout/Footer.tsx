@@ -35,12 +35,12 @@ export default function Footer() {
           </div>
           <div className="lg:col-span-2 footer-col">
             <h3>Services</h3>
-            <ul>
-              <li>Cyber Security</li>
-              <li>Infrastructure</li>
-              <li>Cloud</li>
-              <li>Application</li>
-              <li>Harpy Defence</li>
+            <ul className="space-y-2">
+              <li><Link href="/services/cybersecurity-consulting" className="hover:text-ssg-red transition-colors">Cyber Security</Link></li>
+              <li><Link href="/services/infrastructure-management" className="hover:text-ssg-red transition-colors">Infrastructure</Link></li>
+              <li><Link href="/services/cloud-consulting" className="hover:text-ssg-red transition-colors">Cloud</Link></li>
+              <li><Link href="/services/custom-app-development" className="hover:text-ssg-red transition-colors">Application</Link></li>
+              <li><a href="https://www.harpydefence.com/" target="_blank" rel="noopener noreferrer" className="hover:text-ssg-red transition-colors">Harpy Defence</a></li>
             </ul>
           </div>
           <div className="lg:col-span-2 footer-col">

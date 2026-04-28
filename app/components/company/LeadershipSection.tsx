@@ -23,6 +23,8 @@ export default function LeadershipSection() {
   return (
     <section className="bg-white py-20 lg:py-28 border-t border-slate-100">
       <div className="max-w-container mx-auto px-6 lg:px-8">
+        
+        {/* Header matching original site vibe */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6 reveal">
           <div className="text-left">
             <p className="section-eyebrow">The Experts</p>
@@ -34,14 +36,14 @@ export default function LeadershipSection() {
           <div className="flex items-center gap-3">
             <button 
               onClick={scrollLeft}
-              className="w-12 h-12 rounded-full border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-ssg-red hover:text-white hover:border-ssg-red transition-all duration-300"
+              className="w-12 h-12 rounded-full border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-ssg-red hover:text-white hover:border-ssg-red transition-all duration-300 shadow-sm"
               aria-label="Scroll left"
             >
               <i className="ph-bold ph-arrow-left text-xl"></i>
             </button>
             <button 
               onClick={scrollRight}
-              className="w-12 h-12 rounded-full border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-ssg-red hover:text-white hover:border-ssg-red transition-all duration-300"
+              className="w-12 h-12 rounded-full border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-ssg-red hover:text-white hover:border-ssg-red transition-all duration-300 shadow-sm"
               aria-label="Scroll right"
             >
               <i className="ph-bold ph-arrow-right text-xl"></i>
@@ -52,32 +54,30 @@ export default function LeadershipSection() {
         <div className="relative">
           <div 
             ref={scrollRef}
-            className="flex overflow-x-auto gap-4 sm:gap-6 pb-8 snap-x snap-mandatory hide-scrollbar"
+            className="flex overflow-x-auto gap-8 sm:gap-12 pb-8 pt-4 snap-x snap-mandatory hide-scrollbar justify-start"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
             {managementData.map((leader, idx) => (
-              <div key={idx} className="w-[calc(50%-0.5rem)] sm:w-auto min-w-[150px] sm:min-w-[280px] md:min-w-[290px] xl:min-w-[350px] snap-start flex-shrink-0">
+              <div key={idx} className="w-[180px] md:w-[200px] snap-start flex-shrink-0 text-center">
                 <Link href={`/management/${leader.id}`} className="block group h-full">
-                  <div className="reveal bg-ssg-dark/5 rounded-2xl p-4 sm:p-5 border border-slate-100 transition-all duration-300 hover:shadow-premium hover:-translate-y-2 hover:bg-ssg-dark hover:border-ssg-red/30 h-full flex flex-col">
-                     <div className="relative w-full aspect-[4/3.5] mb-4 sm:mb-5 rounded-xl overflow-hidden bg-slate-200">
+                  <div className="reveal flex flex-col items-center">
+                     {/* Small Circular Photo matching cyfirma reference but with Ssquad light styling */}
+                     <div className="relative w-36 h-36 md:w-44 md:h-44 mb-6 rounded-full overflow-hidden bg-slate-100 ring-4 ring-slate-50 group-hover:ring-ssg-red/20 transition-all duration-500 mx-auto shadow-sm">
                         <Image 
                            src={leader.image}
                            alt={leader.name}
                            fill
-                           className="object-cover opacity-90 group-hover:opacity-100 transition-all duration-500 group-hover:scale-110"
+                           className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
                            style={{ objectPosition: leader.imagePosition || 'center top' }}
                            unoptimized
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-ssg-dark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                      </div>
                      
-                     <h3 className="font-heading font-bold text-base sm:text-lg text-slate-900 group-hover:text-white transition-colors leading-tight">{leader.name}</h3>
-                     <p className="text-ssg-red font-semibold text-[10px] sm:text-xs mt-1 sm:mt-1.5 uppercase tracking-wider mb-3 sm:mb-4 line-clamp-2">{leader.title}</p>
+                     <h3 className="font-heading font-bold text-lg text-slate-900 group-hover:text-ssg-red transition-colors">{leader.name}</h3>
+                     <p className="text-ssg-red font-medium text-xs sm:text-sm mt-2 mb-4 line-clamp-2">{leader.title}</p>
                      
-                     <div className="mt-auto flex">
-                        <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-slate-200 flex items-center justify-center text-slate-600 group-hover:bg-ssg-red group-hover:text-white transition-all duration-300">
-                           <i className="ph-bold ph-arrow-up-right text-base sm:text-lg"></i>
-                        </div>
+                     <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 group-hover:bg-[#0077b5] group-hover:text-white transition-all duration-300 mx-auto">
+                        <i className="ph-fill ph-linkedin-logo text-lg"></i>
                      </div>
                   </div>
                 </Link>

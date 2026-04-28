@@ -2,7 +2,7 @@ export default function TrustSection() {
   const trustFeatures = [
     {
       icon: "ph-shield-star",
-      title: "12+ Years of Expertise",
+      title: "14+ Years of Expertise",
       description: "A decade of mission-critical cyber defense across complex enterprise infrastructure."
     },
     {
