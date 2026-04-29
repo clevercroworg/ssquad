@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { managementData } from '@/app/data/management';
@@ -8,15 +8,81 @@ import { managementData } from '@/app/data/management';
 
 export default function LeadershipSection() {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const autoScrollRef = useRef<number | null>(null);
+  const isHovered = useRef(false);
+  const isInteracting = useRef(false);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  const scroll = (direction: 'left' | 'right') => {
+  // Triple the data to ensure infinite loop buffer
+  const extendedData = [...managementData, ...managementData, ...managementData];
+
+  useEffect(() => {
     const container = scrollRef.current;
     if (!container) return;
-    const scrollAmount = 300;
-    container.scrollBy({
-      left: direction === 'left' ? -scrollAmount : scrollAmount,
-      behavior: 'smooth',
+
+    // Start in the middle set for infinite feel
+    const itemWidth = container.scrollWidth / 3;
+    container.scrollLeft = itemWidth;
+
+    const startAutoScroll = () => {
+      if (!isHovered.current && !isInteracting.current) {
+        container.scrollLeft += 0.8; // Slightly faster crawl
+        
+        // Loop check
+        if (container.scrollLeft >= itemWidth * 2) {
+          container.scrollLeft = itemWidth;
+        }
+      }
+      autoScrollRef.current = requestAnimationFrame(startAutoScroll);
+    };
+
+    autoScrollRef.current = requestAnimationFrame(startAutoScroll);
+
+    return () => {
+      if (autoScrollRef.current) cancelAnimationFrame(autoScrollRef.current);
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, []);
+
+  const handleManualScroll = (direction: 'left' | 'right') => {
+    const container = scrollRef.current;
+    if (!container) return;
+
+    isInteracting.current = true;
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    
+    // Calculate scroll amount: 2 profiles + gaps
+    // Mobile: 180px per profile + 40px gap = 220px per item
+    // Desktop: 260px per profile + 40px gap = 300px per item
+    const isMobile = window.innerWidth < 768;
+    const itemFullWidth = isMobile ? 220 : 300;
+    const scrollAmount = itemFullWidth * 2; // Always scroll 2 profiles
+    
+    const targetScroll = container.scrollLeft + (direction === 'left' ? -scrollAmount : scrollAmount);
+    
+    container.scrollTo({
+      left: targetScroll,
+      behavior: 'smooth'
     });
+
+    // Resume auto-scroll after animation
+    timeoutRef.current = setTimeout(() => {
+      isInteracting.current = false;
+    }, 1500);
+  };
+
+  const onScroll = () => {
+    const container = scrollRef.current;
+    if (!container) return;
+
+    const itemWidth = container.scrollWidth / 3;
+    
+    // Use a small buffer to prevent flickering at boundaries
+    if (container.scrollLeft < itemWidth * 0.5) {
+      container.scrollLeft += itemWidth;
+    } else if (container.scrollLeft >= itemWidth * 2.5) {
+      container.scrollLeft -= itemWidth;
+    }
   };
 
   return (
@@ -36,9 +102,8 @@ export default function LeadershipSection() {
         </div>
 
         <div className="mt-12 relative">
-          {/* Left Arrow */}
           <button
-            onClick={() => scroll('left')}
+            onClick={() => handleManualScroll('left')}
             aria-label="Scroll left"
             className="absolute -left-5 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-500 hover:bg-ssg-red hover:text-white hover:border-ssg-red transition-all duration-300 shadow-lg"
           >
@@ -46,18 +111,23 @@ export default function LeadershipSection() {
           </button>
           {/* Right Arrow */}
           <button
-            onClick={() => scroll('right')}
+            onClick={() => handleManualScroll('right')}
             aria-label="Scroll right"
             className="absolute -right-5 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-500 hover:bg-ssg-red hover:text-white hover:border-ssg-red transition-all duration-300 shadow-lg"
           >
             <i className="ph ph-caret-right text-lg"></i>
           </button>
 
-          <div ref={scrollRef} className="overflow-hidden w-full scroll-smooth group">
-            <div className="flex w-max gap-10 animate-[certScroll_40s_linear_infinite] group-hover:[animation-play-state:paused] pb-8 pt-4">
-              {[1, 2].map((setIndex) => (
-                managementData.map((leader, idx) => (
-                  <div key={`${setIndex}-${idx}`} className="w-[180px] md:w-[200px] lg:w-[260px] flex-shrink-0 text-center" aria-hidden={setIndex === 2 ? "true" : undefined}>
+          <div 
+            ref={scrollRef} 
+            onScroll={onScroll}
+            onMouseEnter={() => { isHovered.current = true; }}
+            onMouseLeave={() => { isHovered.current = false; }}
+            className="overflow-x-hidden w-full group cursor-grab active:cursor-grabbing"
+          >
+            <div className="flex w-max gap-10 pb-8 pt-4">
+              {extendedData.map((leader, idx) => (
+                <div key={idx} className="w-[180px] md:w-[200px] lg:w-[260px] flex-shrink-0 text-center">
                     <Link href={`/management/${leader.id}`} className="block group h-full">
                       <div className="reveal flex flex-col items-center">
                          <div className="relative w-32 h-32 sm:w-36 sm:h-36 md:w-44 md:h-44 mb-4 sm:mb-6 rounded-full overflow-hidden bg-slate-100 ring-4 ring-slate-50 group-hover:ring-ssg-red/20 transition-all duration-500 mx-auto shadow-sm">
@@ -80,7 +150,6 @@ export default function LeadershipSection() {
                       </div>
                     </Link>
                   </div>
-                ))
               ))}
             </div>
           </div>

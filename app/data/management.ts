@@ -15,7 +15,7 @@ export const managementData: ManagementProfile[] = [
   {
     id: "arun-gopakumar",
     name: "Arun Gopakumar",
-    title: "Chief Executive Officer and Founder",
+    title: "CEO & Founder",
     image: "/management/arun.jpg",
     imagePosition: "30% center",
     linkedin: "#",
