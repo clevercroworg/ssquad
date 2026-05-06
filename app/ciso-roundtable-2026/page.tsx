@@ -20,7 +20,7 @@ export default function CisoRoundtable() {
     startTransition(async () => {
       const result = await submitCisoRsvp(formData);
       if (result.success) {
-        router.push("/ciso-roundtable/thank-you");
+        router.push("/ciso-roundtable-2026/thank-you");
       } else {
         setError(result.message || "An error occurred. Please try again.");
       }

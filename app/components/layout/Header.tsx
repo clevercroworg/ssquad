@@ -145,7 +145,7 @@ export default function Header() {
 
   const currentItems = serviceData[activeService] || [];
 
-  if (pathname?.startsWith('/admin') || pathname?.startsWith('/ciso-roundtable')) return null;
+  if (pathname?.startsWith('/admin') || pathname?.startsWith('/ciso-roundtable-2026')) return null;
 
   return (
     <header 

@@ -10,7 +10,7 @@ export default function ThankYouPage() {
       <div className="relative z-10 w-full max-w-2xl mx-auto px-6 text-center ciso-animate-fade-in-up">
         {/* Logo */}
         <div className="flex justify-center items-center gap-6 mb-10">
-          <Link href="/ciso-roundtable">
+          <Link href="/ciso-roundtable-2026">
             <Image src="/images/ciso-roundtable/SSquad_logo_white.svg" alt="Ssquad Global" width={120} height={40} className="h-10 w-auto" />
           </Link>
           <span className="text-white/40 text-2xl font-light leading-none">|</span>
@@ -31,7 +31,7 @@ export default function ThankYouPage() {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link href="/ciso-roundtable" className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-ssg-red px-6 py-3.5 text-sm font-bold text-white transition-all duration-300 hover:bg-white hover:text-ssg-red shadow-[0_0_15px_rgba(236,32,36,0.3)]">
+            <Link href="/ciso-roundtable-2026" className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-ssg-red px-6 py-3.5 text-sm font-bold text-white transition-all duration-300 hover:bg-white hover:text-ssg-red shadow-[0_0_15px_rgba(236,32,36,0.3)]">
               <i className="ph ph-arrow-left"></i> Return to Homepage
             </Link>
             <a href="https://ssquad.com" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/5 px-6 py-3.5 text-sm font-bold text-white transition-all duration-300 hover:bg-white/10 hover:border-white/40">
