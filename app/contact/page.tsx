@@ -75,7 +75,7 @@ export default function ContactPage() {
     { country: "Hong Kong", code: "hk", company: "Ssquad Limited", address: "No 5, 17/F Strand 50, 50 Bonham Strand, Sheung Wan, Hong Kong." },
     { country: "India", code: "in", company: "Ssquad Information Systems Pvt Ltd", address: "Silver Soft Tech Park, Whitefield Main Road, 1st Floor, EPIP 1st Phase, Bangalore-560066" },
     { country: "Indonesia", code: "id", company: "PT Ssquad Information Systems", address: "AXA Tower Lt. 36, Unit 5-6, Kuningan City, Jl. Prof Dr. Satrio Kav 18, Kuningan, Jakarta Selatan, 12940" },
-    { country: "Malaysia", code: "my", company: "Ssquad Sdn Bhd", address: "25-7, Level 25-03 and 33-BC-5, Q Sentral, Jalan Stesen Sentral 2, Kuala Lumpur Sentral, 50470" },
+    { country: "Malaysia", code: "my", company: "Ssquad Sdn Bhd", address: "28-7, Level 28-03, Q Sentral, Jalan Stesen Sentral 2, Kuala Lumpur Sentral, 50470" },
     { country: "Taiwan", code: "tw", company: "Ssquad Limited", address: "11F, No. 235, Section 4, Zhong Xiao East Road, Da An District, Taipei City 106, Taiwan (ROC)" },
     { country: "Thailand", code: "th", company: "Ssquad Limited", address: "No.30 Sukhumvit soi 61 Klongton Nua, Wattana, Bangkok 10110" },
     { country: "UK", code: "gb", company: "Ssquad Limited", address: "128 City Road, London, EC1V 2NX, UK" },
