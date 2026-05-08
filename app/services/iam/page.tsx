@@ -102,7 +102,7 @@ Our premium IAM solutions integrate behavioral analytics and automated identity 
         columns={2}
         cards={[
           { title: "Identity Governance And Administration", points: ["Automated user lifecycle management", "Role-based access control (RBAC)", "Access certification and attestation", "Separation of duties enforcement"] },
-          { title: "Privileged Access Management", points: ["Administration of privileged credentials", "Just-in-time access provisioning", "Session monitoring and recording", "Play synchronization prevention"], highlight: true },
+          { title: "Privileged Access Management", points: ["Administration of privileged credentials", "Just-in-time access provisioning", "Session monitoring and recording", "Play synchronization prevention"] },
           { title: "Adaptive Authentication", points: ["Risk-based multi-factor authentication", "Context-aware access policies", "Behavioral biometrics", "Passwordless authentication options"] },
           { title: "Access Management", points: ["Single sign-on (SSO) for enterprise apps", "Federation standards support (SAML, OAuth)", "API access security", "Microservices authentication"] }
         ]}
