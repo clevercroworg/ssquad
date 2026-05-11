@@ -80,7 +80,7 @@ export default function ContactPage() {
     { country: "Thailand", code: "th", company: "Ssquad Limited", address: "No.30 Sukhumvit soi 61 Klongton Nua, Wattana, Bangkok 10110" },
     { country: "UK", code: "gb", company: "Ssquad Limited", address: "128 City Road, London, EC1V 2NX, UK" },
     { country: "USA", code: "us", company: "Ssquad Inc", address: "98 Cuttermill Road, Ste 466, Great Neck NY 11021" },
-    { country: "Kuwait", code: "kw", company: "Directional Universal For General Trade and Construction", address: "P.O BOX 66803 BAYAN, ALSHARQ 43759, Ph: 96522204051-965" },
+    { country: "Kuwait", code: "kw", company: "Directional Universal For General Trade and Construction", address: "P.O BOX 66803 BAYAN, ALSHARQ 43759", phone: "96522204051-965" },
   ];
 
   return (
@@ -244,7 +244,10 @@ export default function ContactPage() {
                     <div className="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center shrink-0 border border-slate-100 group-hover:border-red-100 transition-colors">
                       <i className="ph-fill ph-map-pin text-slate-400 group-hover:text-ssg-red text-lg transition-colors duration-300"></i>
                     </div>
-                    <p className="text-[15px] font-medium text-slate-600 leading-relaxed pt-1.5">{loc.address}</p>
+                    <div className="pt-1.5">
+                      <p className="text-[15px] font-medium text-slate-600 leading-relaxed">{loc.address}</p>
+                      {loc.phone && <p className="text-[15px] font-medium text-slate-600 leading-relaxed mt-1">Ph: {loc.phone}</p>}
+                    </div>
                   </div>
                 </div>
               </div>
