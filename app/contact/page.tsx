@@ -80,7 +80,7 @@ export default function ContactPage() {
     { country: "Thailand", code: "th", company: "Ssquad Limited", address: "No.30 Sukhumvit soi 61 Klongton Nua, Wattana, Bangkok 10110" },
     { country: "UK", code: "gb", company: "Ssquad Limited", address: "128 City Road, London, EC1V 2NX, UK" },
     { country: "USA", code: "us", company: "Ssquad Inc", address: "98 Cuttermill Road, Ste 466, Great Neck NY 11021" },
-    { country: "Kuwait", code: "kw", company: "Directional Universal For General Trade and Construction", address: "P.O BOX 66803 BAYAN, ALSHARQ 43759", phone: "96522204051-965" },
+    { country: "Kuwait", code: "kw", company: "Directional Universal For General Trade and Construction", address: "P.O BOX 66803 BAYAN, ALSHARQ 43759", phone: "96522204051-965", label: "Agent Partner" },
   ];
 
   return (
@@ -235,6 +235,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="font-heading font-extrabold text-slate-900 text-2xl tracking-tight group-hover:text-ssg-red transition-colors duration-300">{loc.country}</h3>
+                    {loc.label && <span className="text-ssg-red font-bold text-xs uppercase tracking-widest">{loc.label}</span>}
                     <h4 className="font-bold text-slate-500 text-xs mt-2 uppercase tracking-widest">{loc.company}</h4>
                   </div>
                 </div>
