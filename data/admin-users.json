@@ -1,0 +1,9 @@
+[
+  {
+    "id": "admin-1",
+    "email": "admin@ssquad.com",
+    "passwordHash": "$2b$10$g.Ikjf7SPIplEMoOCaLTrOKDic3VyRZE.5hsYmNKjI0qCKswiEvvO",
+    "name": "Ssquad Admin",
+    "role": "admin"
+  }
+]

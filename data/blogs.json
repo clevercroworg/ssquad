@@ -1,0 +1,29 @@
+[
+  {
+    "id": "security-advisory",
+    "title": "Security Advisory: Strengthen Your Cyber Defenses With Expert Guidance",
+    "summary": "In today’s volatile cyber landscape, expert guidance helps organizations reduce risk and improve resilience through tailored defense strategies.",
+    "content": "<h2>The Growing Complexity of Cyber Threats</h2><p>In today’s volatile cyber landscape, the frequency and sophistication of attacks are increasing at an alarming rate. Organizations can no longer rely on traditional perimeter defenses. Expert guidance helps organizations reduce risk and improve resilience through tailored defense strategies.</p><h3>Why Expert Guidance is Critical</h3><p>Navigating the cybersecurity landscape requires specialized knowledge. By partnering with experts, businesses can:</p><ul><li>Identify hidden vulnerabilities before they are exploited.</li><li>Implement Zero Trust architectures effectively.</li><li>Ensure compliance with evolving global regulations.</li></ul><h3>Actionable Steps for 2025</h3><p>By adopting a proactive security posture and ensuring continuous monitoring, businesses can maintain robust defenses. Don't wait for a breach to occur—invest in strategic advisory and fortify your digital assets today.</p>",
+    "image": "/images/cyber security/AI Powered Cybersecurity Solutions for Real-Time Defense.jpg",
+    "category": "Latest Insights",
+    "date": "2025-05-15"
+  },
+  {
+    "id": "nist-framework",
+    "title": "How Can Organizations Use The NIST Cybersecurity Framework To Strengthen Their Security?",
+    "summary": "Understand how the NIST framework provides a structured path to identify, protect, detect, respond, and recover from modern cyber threats.",
+    "content": "<h2>Deconstructing the NIST Framework</h2><p>The NIST Cybersecurity Framework is universally recognized as the gold standard for managing cyber risk. Understand how the NIST framework provides a structured path to identify, protect, detect, respond, and recover from modern cyber threats.</p><h3>The Core Functions</h3><ol><li><strong>Identify:</strong> Develop an organizational understanding of risk to systems, assets, data, and capabilities.</li><li><strong>Protect:</strong> Implement appropriate safeguards to ensure delivery of critical infrastructure services.</li><li><strong>Detect:</strong> Develop and implement the appropriate activities to identify the occurrence of a cybersecurity event.</li><li><strong>Respond & Recover:</strong> Take action regarding a detected cybersecurity incident and restore any capabilities or services that were impaired.</li></ol><h3>Implementation Strategies</h3><p>Implementing the NIST framework allows for an organized approach to addressing cybersecurity risks, enabling organizations of all sizes to prioritize their defenses effectively.</p>",
+    "image": "/images/cyber security/Comprehensive Protection for Modern Software.jpg",
+    "category": "Latest Insights",
+    "date": "2020-11-20"
+  },
+  {
+    "id": "ransomware-smb",
+    "title": "Ransomware For Small Business: Everything You Need To Know About",
+    "summary": "Learn key ransomware risks and practical security controls small and mid-sized businesses should implement first to stay protected.",
+    "content": "<h2>Small Businesses are Prime Targets</h2><p>It's a common misconception that ransomware operators only target massive enterprises. In reality, SMBs are often viewed as low-hanging fruit. Learn key ransomware risks and practical security controls small and mid-sized businesses should implement first to stay protected.</p><h3>The Impact of an Attack</h3><p>Ransomware can cripple a small business. Beyond the immediate financial extortion, the costs associated with operational downtime, legal liabilities, and reputational damage can be devastating.</p><h3>Critical Defense Strategies</h3><ul><li><strong>Immutable Backups:</strong> Implement frequent, off-site backups that cannot be encrypted by malware.</li><li><strong>Endpoint Detection and Response (EDR):</strong> Deploy advanced monitoring tools to catch ransomware behavior before encryption begins.</li><li><strong>Security Awareness Training:</strong> Educate your staff on how to spot phishing emails, which remain the primary delivery mechanism for ransomware.</li></ul><p>Taking these steps immediately can drastically reduce your risk profile and ensure your business survives an attempted attack.</p>",
+    "image": "/images/cyber security/OT Security Services.jpg",
+    "category": "News & Events",
+    "date": "2020-11-25"
+  }
+]
