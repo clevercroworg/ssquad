@@ -68,12 +68,12 @@ const consultingServices = [
 ];
 
 const riskAreas = [
-  { title: "Spotting Enterprise Risks", description: "Finding software flaws, setting misconfiguration, and spotting out security issues before they cause damage to the IT system." },
-  { title: "Risk Impact Analysis", description: "Our GRC consultant analyses how much it will cause to the system in production." },
-  { title: "Risk Prioritisation", description: "Identifying issues that need immediate attention based on their potential impact." },
-  { title: "Risk Treatment", description: "Checking that the existing system is able to protect the system from existing threats." },
-  { title: "Evaluation of Control", description: "Checking whether existing safeguards adequately address identified risks." },
-  { title: "Risk Monitoring", description: "Our Enterprise Risk Management system checks ongoing system security and monitoring production grade systems with time to time checks." }
+  { icon: "ph-binoculars", title: "Spotting Enterprise Risks", description: "Finding software flaws, setting misconfiguration, and spotting out security issues before they cause damage to the IT system." },
+  { icon: "ph-gauge", title: "Risk Impact Analysis", description: "Our GRC consultant analyses how much it will cause to the system in production." },
+  { icon: "ph-ranking", title: "Risk Prioritisation", description: "Identifying issues that need immediate attention based on their potential impact." },
+  { icon: "ph-shield-plus", title: "Risk Treatment", description: "Checking that the existing system is able to protect the system from existing threats." },
+  { icon: "ph-sliders-horizontal", title: "Evaluation of Control", description: "Checking whether existing safeguards adequately address identified risks." },
+  { icon: "ph-broadcast", title: "Risk Monitoring", description: "Our Enterprise Risk Management system checks ongoing system security and monitoring production grade systems with time to time checks." }
 ];
 
 const enterpriseSolutions = [
@@ -84,11 +84,11 @@ const enterpriseSolutions = [
 ];
 
 const approachSteps = [
-  { title: "Examine Requirement", description: "Ssquad reviews your technology environment, business priorities, security concerns, and applicable compliance requirements." },
-  { title: "Review Practices", description: "We identify relevant security practices required, governance processes, and technology gaps management measures to understand your current position." },
-  { title: "Identifying and Prioritising Vulnerability", description: "Our GRC team review assessment findings, identify gaps that need awareness, and prioritise breach according to tickets that will lead to major business impact over the time." },
-  { title: "Recommending Improvements", description: "Based on identifying issues we measure vulnerability and we prioritise it based on risk and we build a complete road map to solve business requirements." },
-  { title: "Supporting Ongoing Improvement", description: "Where required, GRC consultants bring up implementation, security monitoring, and continuous improvement of cybersecurity controls." }
+  { icon: "ph-clipboard-text", title: "Examine Requirement", description: "Ssquad reviews your technology environment, business priorities, security concerns, and applicable compliance requirements." },
+  { icon: "ph-file-search", title: "Review Practices", description: "We identify relevant security practices required, governance processes, and technology gaps management measures to understand your current position." },
+  { icon: "ph-shield-warning", title: "Identifying and Prioritising Vulnerability", description: "Our GRC team review assessment findings, identify gaps that need awareness, and prioritise breach according to tickets that will lead to major business impact over the time." },
+  { icon: "ph-lightbulb", title: "Recommending Improvements", description: "Based on identifying issues we measure vulnerability and we prioritise it based on risk and we build a complete road map to solve business requirements." },
+  { icon: "ph-arrows-clockwise", title: "Supporting Ongoing Improvement", description: "Where required, GRC consultants bring up implementation, security monitoring, and continuous improvement of cybersecurity controls." }
 ];
 
 const industries = [
@@ -102,7 +102,7 @@ const industries = [
 
 const whyChoose = [
   { icon: "ph-stack", text: "Ssquad Global arranges cybersecurity examination, vulnerability management, penetration testing, cloud security, and managed security capabilities with governance and regulatory alignment support." },
-  { icon: "ph-scales", text: "Our work addresses technology risk management requirements relevant to Malaysia and Singapore, including RMiT and MAS TRM." },
+  { icon: "ph-gavel", text: "Our work addresses technology risk management requirements relevant to Malaysia and Singapore, including RMiT and MAS TRM." },
   { icon: "ph-globe-hemisphere-east", text: "With headquarters in Singapore, operations in Malaysia, and centres of excellence in India, Ssquad Global supports organisations across international markets. Our managed security capabilities can also provide ongoing monitoring support where required." }
 ];
 
@@ -182,7 +182,7 @@ export default function GrcServicesPage() {
               {riskAreas.map((item) => (
                 <li key={item.title} className="flex gap-4">
                   <span className="w-10 h-10 shrink-0 rounded-lg bg-red-50 border border-red-100 flex items-center justify-center text-ssg-red text-xl">
-                    <i className="ph ph-check-circle"></i>
+                    <i className={`ph ${item.icon}`}></i>
                   </span>
                   <div>
                     <strong className="block [font-family:var(--font-plus-jakarta),sans-serif] font-semibold text-slate-900 leading-snug">{item.title}</strong>
@@ -224,6 +224,7 @@ export default function GrcServicesPage() {
             {approachSteps.map((step, idx) => (
               <Card
                 key={step.title}
+                icon={step.icon}
                 width={COL_3}
                 title={<><span className="text-ssg-red">{idx + 1}.</span> {step.title}</>}
                 description={step.description}
