@@ -19,7 +19,7 @@ function SectionHeader({ title, intro, lead, dark = false }: { title: string; in
         <p className={`mt-5 text-[1.05rem] lg:text-lg leading-relaxed ${dark ? 'text-slate-300' : 'text-slate-600'}`}>{intro}</p>
       )}
       {lead && (
-        <p className={`mt-8 [font-family:var(--font-plus-jakarta),sans-serif] font-semibold text-lg ${dark ? 'text-white' : 'text-slate-900'}`}>{lead}</p>
+        <p className="mt-8 inline-block bg-ssg-red/10 border border-ssg-red/20 text-ssg-red rounded-full px-6 py-2.5 [font-family:var(--font-plus-jakarta),sans-serif] font-semibold text-lg">{lead}</p>
       )}
     </div>
   );
@@ -50,12 +50,12 @@ function Card({ title, description, icon, width, listItem = false }: CardProps) 
 }
 
 const challenges = [
-  { title: "Unclear Enterprise Risk Ownership", description: "Nobody is explicitly put in charge, ownership needs to be clearly assigned when a security gap gets flagged, leaving important fixes hanging." },
-  { title: "Compliance Gaps", description: "Daily processes, tools, and configurations may fall short of regulatory requirements." },
-  { title: "Missed Security Maintenance", description: "Over time essential tasks may be neglected by the team such as user permission reviews, log checks, and software updates." },
-  { title: "Outdated Enterprise Risk Management Policies", description: "Written manuals describe office routines and security practices that changed years ago." },
-  { title: "Audit Preparation Difficulties", description: "Teams lose valuable time pulling evidence and documents together right before an audit." },
-  { title: "Limited Risk Visibility", description: "Keeping track of servers and security will be difficult over the time when business grows." }
+  { icon: "ph-user-circle-gear", title: "Unclear Enterprise Risk Ownership", description: "Nobody is explicitly put in charge, ownership needs to be clearly assigned when a security gap gets flagged, leaving important fixes hanging." },
+  { icon: "ph-list-checks", title: "Compliance Gaps", description: "Daily processes, tools, and configurations may fall short of regulatory requirements." },
+  { icon: "ph-wrench", title: "Missed Security Maintenance", description: "Over time essential tasks may be neglected by the team such as user permission reviews, log checks, and software updates." },
+  { icon: "ph-clock-counter-clockwise", title: "Outdated Enterprise Risk Management Policies", description: "Written manuals describe office routines and security practices that changed years ago." },
+  { icon: "ph-folder-open", title: "Audit Preparation Difficulties", description: "Teams lose valuable time pulling evidence and documents together right before an audit." },
+  { icon: "ph-eye-slash", title: "Limited Risk Visibility", description: "Keeping track of servers and security will be difficult over the time when business grows." }
 ];
 
 const consultingServices = [
@@ -64,8 +64,7 @@ const consultingServices = [
   { icon: "ph-magnifying-glass", title: "Evaluating Your Baseline", description: "Our GRC Consulting team examines each and every part of the existing security system and IT infrastructure and ongoing processes of development/deployment so we identify operational blind spots. This helps your core team understand where things stand before making changes." },
   { icon: "ph-file-text", title: "Updating Enterprise Risk Management Internal Policies", description: "Policies that are outdated can create confusion between documented procedures and daily operations. So we pitch and fix it up." },
   { icon: "ph-crosshair", title: "Targeting Real Risks", description: "Every vulnerability carries a different level. We examine your cloud environments, networks, and applications security to highlight security weaknesses that need attention." },
-  { icon: "ph-shield-check", title: "Testing Security Defenses", description: "We run manual and automated checks and penetration testing to fix the process and to check whether existing safeguards can withstand potential threats." },
-  { icon: "ph-clipboard-text", title: "Preparing for Audits", description: "Last-minute documents cause unnecessary stress and problems in the ongoing process. We help to review Regulatory Compliance checks, organise evidence, and prepare your team for compliance examinations and audits." }
+  { icon: "ph-shield-check", title: "Testing Security Defenses", description: "We run manual and automated checks and penetration testing to fix the process and to check whether existing safeguards can withstand potential threats." }
 ];
 
 const riskAreas = [
@@ -149,11 +148,11 @@ export default function GrcServicesPage() {
           <SectionHeader
             title="Governance, Risk and Compliance Challenges We Help Address"
             intro="Security snags and compliance issues don't just appear out of nowhere. They stack up bit by bit while everyone is busy running the business."
-            lead="Usually organizations security concerns are:"
+            lead="Usually organizations security concerns are"
           />
           <ul className={GRID}>
             {challenges.map((item) => (
-              <Card key={item.title} listItem icon="ph-warning-circle" width={COL_3} title={item.title} description={item.description} />
+              <Card key={item.title} listItem icon={item.icon} width={COL_3} title={item.title} description={item.description} />
             ))}
           </ul>
           <p className="reveal mt-12 lg:mt-16 max-w-3xl mx-auto text-center text-slate-600 text-[1.05rem] lg:text-lg leading-relaxed">
@@ -177,7 +176,7 @@ export default function GrcServicesPage() {
 
           <div className="reveal mt-16 lg:mt-20 bg-white border border-slate-200 rounded-3xl shadow-sm p-6 sm:p-10 lg:p-12">
             <p className="text-center text-slate-900 [font-family:var(--font-plus-jakarta),sans-serif] font-semibold text-xl">
-              Our approach covers six important areas:
+              Our approach covers six important areas
             </p>
             <ul className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-8">
               {riskAreas.map((item) => (
