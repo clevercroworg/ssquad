@@ -8,7 +8,6 @@ interface AppServiceHeaderProps {
   subtitle?: string;
   breadcrumbs: { label: string; href: string }[];
   theme?: 'cyber' | 'clean';
-  actions?: { label: string; href: string; variant?: 'primary' | 'secondary' }[];
 }
 
 const DecryptingTitle = ({ text, theme = 'cyber' }: { text: string, theme?: 'cyber' | 'clean' }) => {
@@ -48,7 +47,7 @@ const DecryptingTitle = ({ text, theme = 'cyber' }: { text: string, theme?: 'cyb
   );
 };
 
-export default function AppServiceHeader({ title, subtitle, breadcrumbs, theme = 'cyber', actions }: AppServiceHeaderProps) {
+export default function AppServiceHeader({ title, subtitle, breadcrumbs, theme = 'cyber' }: AppServiceHeaderProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -315,23 +314,6 @@ export default function AppServiceHeader({ title, subtitle, breadcrumbs, theme =
                 </p>
               </div>
             )}
-          </div>
-        )}
-
-        {/* Optional CTA Buttons */}
-        {actions && actions.length > 0 && (
-          <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 pointer-events-auto">
-            {actions.map((action) => (
-              <Link
-                key={action.label}
-                href={action.href}
-                className={action.variant === 'secondary'
-                  ? "w-full sm:w-auto inline-flex items-center justify-center gap-2 border border-white/25 bg-white/5 backdrop-blur-md text-white font-semibold py-3.5 px-8 rounded-full hover:bg-white/10 hover:border-white/40 transition-all duration-300"
-                  : "w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gradient-to-r from-ssg-red via-rose-500 to-ssg-red text-white font-bold py-3.5 px-8 rounded-full shadow-[0_0_20px_rgba(220,38,38,0.5)] hover:shadow-[0_0_35px_rgba(220,38,38,0.8)] hover:-translate-y-0.5 transition-all duration-300"}
-              >
-                {action.label} <i className="ph ph-arrow-up-right font-bold"></i>
-              </Link>
-            ))}
           </div>
         )}
       </div>
