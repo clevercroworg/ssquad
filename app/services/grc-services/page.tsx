@@ -356,11 +356,11 @@ export default function GrcServicesPage() {
             title="Why Choose Our GRC Consulting Services?"
             intro="Good GRC consulting requires more than understanding regulations. It also requires knowing how security controls work across real technology environments."
           />
-          <div className="mt-10 grid md:grid-cols-3 xl:grid-cols-[1.35fr_1fr_1fr] gap-5">
+          <div className="mt-10 grid md:grid-cols-3 gap-5">
             {whyChoose.map((item) => (
               <div key={item.icon} className="reveal bg-white border border-slate-200 rounded-xl p-5 hover:shadow-lg transition-shadow">
                 <IconTile icon={item.icon} />
-                <p className="mt-4 text-slate-600 text-sm xl:text-[12.5px] leading-relaxed xl:text-justify">{item.text}</p>
+                <p className="mt-4 text-slate-600 text-sm leading-relaxed xl:text-justify">{item.text}</p>
               </div>
             ))}
           </div>
