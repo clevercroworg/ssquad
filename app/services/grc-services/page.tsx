@@ -214,7 +214,7 @@ export default function GrcServicesPage() {
               </li>
             ))}
           </ul>
-          <p className="reveal mt-10 max-w-3xl text-slate-600 text-base lg:text-lg leading-relaxed text-justify hyphens-auto">
+          <p className="reveal mt-10 text-slate-600 text-base lg:text-lg leading-relaxed text-justify hyphens-auto">
             Our expert GRC team communicates and helps in identifying these risks, reviewing existing systems, and prioritizing corrective actions so your business knows what needs fixing first.
           </p>
         </div>
