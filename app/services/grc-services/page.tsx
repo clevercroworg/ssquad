@@ -99,13 +99,13 @@ const faqs = [
 const inputClass = "w-full bg-white text-slate-900 border border-slate-300 rounded-lg px-4 py-3 outline-none transition-all placeholder:text-slate-400 focus:border-ssg-red focus:ring-4 focus:ring-red-500/10";
 
 function ConsultationForm() {
-  const [form, setForm] = useState({ fname: '', wemail: '', pnumber: '', cmessage: '' });
+  const [form, setForm] = useState({ fname: '', wemail: '', cname: '', pnumber: '', cmessage: '', terms: false });
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [message, setMessage] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { id, value } = e.target;
-    setForm(prev => ({ ...prev, [id]: value }));
+    const { id, value, type } = e.target;
+    setForm(prev => ({ ...prev, [id]: type === 'checkbox' ? (e.target as HTMLInputElement).checked : value }));
   };
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
@@ -121,8 +121,8 @@ function ConsultationForm() {
           name: form.fname,
           email: form.wemail,
           number: form.pnumber,
-          subject: 'GRC Consultation Request',
-          message: form.cmessage
+          subject: `GRC Consultation Request - ${form.cname}`,
+          message: `Company: ${form.cname}\n\nRequirements:\n${form.cmessage}`
         })
       });
       const data = await res.json();
@@ -130,7 +130,7 @@ function ConsultationForm() {
 
       setStatus('success');
       setMessage(data.message);
-      setForm({ fname: '', wemail: '', pnumber: '', cmessage: '' });
+      setForm({ fname: '', wemail: '', cname: '', pnumber: '', cmessage: '', terms: false });
     } catch (err: unknown) {
       setStatus('error');
       setMessage(err instanceof Error ? err.message : 'An unexpected error occurred.');
@@ -143,8 +143,18 @@ function ConsultationForm() {
         <input id="fname" type="text" required value={form.fname} onChange={handleChange} placeholder="Full name *" aria-label="Full name" autoComplete="new-password" className={inputClass} />
         <input id="wemail" type="email" required value={form.wemail} onChange={handleChange} placeholder="Email *" aria-label="Email" autoComplete="new-password" className={inputClass} />
       </div>
-      <input id="pnumber" type="tel" value={form.pnumber} onChange={handleChange} placeholder="Phone" aria-label="Phone" autoComplete="new-password" className={inputClass} />
-      <textarea id="cmessage" required value={form.cmessage} onChange={handleChange} placeholder="Message *" aria-label="Message" autoComplete="new-password" className={`${inputClass} resize-none flex-1 min-h-[9rem]`}></textarea>
+      <div className="grid sm:grid-cols-2 gap-3">
+        <input id="cname" type="text" required value={form.cname} onChange={handleChange} placeholder="Company *" aria-label="Company" autoComplete="new-password" className={inputClass} />
+        <input id="pnumber" type="tel" value={form.pnumber} onChange={handleChange} placeholder="Phone" aria-label="Phone" autoComplete="new-password" className={inputClass} />
+      </div>
+      <textarea id="cmessage" required value={form.cmessage} onChange={handleChange} placeholder="Requirements *" aria-label="Requirements" autoComplete="new-password" className={`${inputClass} resize-none flex-1 min-h-[9rem]`}></textarea>
+
+      <div className="flex items-start gap-3 px-1 pt-1">
+        <input type="checkbox" id="terms" required checked={form.terms} onChange={handleChange} className="mt-1 w-4 h-4 rounded border-slate-300 accent-ssg-red cursor-pointer" />
+        <label htmlFor="terms" className="text-slate-500 text-sm cursor-pointer leading-relaxed">
+          I accept the <Link href="/terms" className="text-slate-700 hover:text-ssg-red font-semibold transition-colors underline decoration-slate-200 underline-offset-4">Terms of Service</Link> and <Link href="/privacy" className="text-slate-700 hover:text-ssg-red font-semibold transition-colors underline decoration-slate-200 underline-offset-4">Privacy Framework</Link>.
+        </label>
+      </div>
 
       {status === 'success' && (
         <div className="p-3.5 rounded-lg bg-green-50 border border-green-200 text-green-700 flex items-center gap-2.5 text-sm font-medium">
@@ -388,10 +398,6 @@ export default function GrcServicesPage() {
               <p>Not sure whether your current security setup can handle new threats? Are you worried about risk or security concerns in your IT infrastructure or applications? Let&apos;s have an audit call with our team and let&apos;s find out what needs attention.</p>
               <p>Ssquad Global keeps things practical with cybersecurity risk assessments, governance reviews, regulatory guidance, and audit preparation support.</p>
               <p>Drop us a line to discuss your requirements.</p>
-            </div>
-            <div className="mt-8 pt-8 border-t border-white/15 space-y-3 text-white font-semibold">
-              <p className="flex items-center gap-2.5"><i className="ph ph-envelope-simple text-lg text-slate-300"></i><span>Email: <a href="mailto:sales@ssquad.com" className="hover:text-[#ff7a85] transition-colors">sales@ssquad.com</a></span></p>
-              <p className="flex items-center gap-2.5"><i className="ph ph-globe text-lg text-slate-300"></i><span>Contact: <Link href="/contact" className="hover:text-[#ff7a85] transition-colors">www.ssquad.com/contact</Link></span></p>
             </div>
           </div>
 
