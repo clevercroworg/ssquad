@@ -13,7 +13,7 @@ function SectionIntro({ title, intro, dark = false }: { title: string; intro?: s
   return (
     <div className="reveal">
       <h2 className={`text-3xl lg:text-[2.35rem] font-bold leading-tight ${dark ? 'text-white' : 'text-slate-900'}`}>{title}</h2>
-      {intro && <p className={`mt-4 text-base lg:text-lg leading-relaxed md:text-justify ${dark ? 'text-slate-300' : 'text-slate-600'}`}>{intro}</p>}
+      {intro && <p className={`mt-4 text-base lg:text-lg leading-relaxed text-justify hyphens-auto ${dark ? 'text-slate-300' : 'text-slate-600'}`}>{intro}</p>}
     </div>
   );
 }
@@ -38,7 +38,7 @@ const challenges = [
 const consultingServices = [
   { icon: "ph-check-square", title: "Regulatory Compliance Consulting Services", description: "Ssquad Global works parallelly with your team to provide comprehensive SOC 2 readiness support, ISO 27001 certification support, and PCI-DSS compliance services support for your applications and IT infrastructure." },
   { icon: "ph-chart-bar", title: "Enterprise Risk Management Consulting Services", description: "Our Enterprise Risk Management Consulting Services focus on identifying, examining, and managing cybersecurity and technology risks that could affect your organisation." },
-  { icon: "ph-compass", title: "Evaluating Your Baseline", description: "Our GRC Consulting team examines each and every part of the existing security system and IT infrastructure and ongoing processes of development/deployment so we identify operational blind spots. This helps your core team understand where things stand before making changes." },
+  { icon: "ph-compass", title: "Evaluating Your Baseline", description: "Our GRC Consulting team examines each and every part of the existing security system and IT infrastructure and ongoing processes of development/\u200Bdeployment so we identify operational blind spots. This helps your core team understand where things stand before making changes." },
   { icon: "ph-note-pencil", title: "Updating Enterprise Risk Management Internal Policies", description: "Policies that are outdated can create confusion between documented procedures and daily operations. So we pitch and fix it up." },
   { icon: "ph-target", title: "Targeting Real Risks", description: "Every vulnerability carries a different level. We examine your cloud environments, networks, and applications security to highlight security weaknesses that need attention." },
   { icon: "ph-shield", title: "Testing Security Defenses", description: "We run manual and automated checks and penetration testing to fix the process and to check whether existing safeguards can withstand potential threats." }
@@ -184,7 +184,7 @@ export default function GrcServicesPage() {
             <h1 className="text-white text-4xl sm:text-5xl lg:text-[3.6rem] font-bold leading-[1.1] tracking-tight">
               Governance, Risk &amp; Compliance <span className="text-[#ff6b78]">Services</span>
             </h1>
-            <p className="mt-6 text-slate-300 text-base lg:text-lg leading-relaxed md:text-justify">
+            <p className="mt-6 text-slate-300 text-base lg:text-lg leading-relaxed text-justify hyphens-auto">
               Worried about security gaps and changing compliance requirements? Ssquad Global helps review your business&apos;s security controls, identify IT infrastructure risks, and update internal Enterprise Risk policies. Our GRC consulting team works alongside yours to find practical solutions and improve compliance readiness.
             </p>
             <div className="mt-8 flex flex-col sm:flex-row justify-center gap-3">
@@ -210,11 +210,11 @@ export default function GrcServicesPage() {
               <li key={item.title} className="reveal bg-white border border-slate-200 border-t-[3px] border-t-ssg-red rounded-xl p-6 hover:shadow-lg transition-shadow">
                 <IconTile icon={item.icon} />
                 <strong className={`mt-4 block ${HEADING_FONT} font-bold text-slate-900 text-[1.05rem] leading-snug`}>{item.title}</strong>
-                <p className="mt-2 text-slate-600 text-[0.95rem] leading-relaxed">{item.description}</p>
+                <p className="mt-2 text-slate-600 text-[0.95rem] leading-relaxed text-justify hyphens-auto">{item.description}</p>
               </li>
             ))}
           </ul>
-          <p className="reveal mt-10 rounded-xl border border-slate-200 border-l-4 border-l-ssg-red bg-slate-50 px-6 py-5 text-slate-700 text-base lg:text-lg leading-relaxed md:text-justify">
+          <p className="reveal mt-10 rounded-xl border border-slate-200 border-l-4 border-l-ssg-red bg-slate-50 px-6 py-5 text-slate-700 text-base lg:text-lg leading-relaxed text-justify hyphens-auto">
             Our expert GRC team communicates and helps in identifying these risks, reviewing existing systems, and prioritizing corrective actions so your business knows what needs fixing first.
           </p>
         </div>
@@ -232,7 +232,7 @@ export default function GrcServicesPage() {
               <div key={item.title} className="reveal bg-white border border-slate-200 border-t-[3px] border-t-[#2f6fde] rounded-xl p-6 hover:shadow-lg transition-shadow">
                 <IconTile icon={item.icon} />
                 <h3 className="mt-4 font-bold text-slate-900 text-[1.05rem] leading-snug">{item.title}</h3>
-                <p className="mt-2 text-slate-600 text-[0.95rem] leading-relaxed">{item.description}</p>
+                <p className="mt-2 text-slate-600 text-[0.95rem] leading-relaxed text-justify hyphens-auto">{item.description}</p>
               </div>
             ))}
           </div>
@@ -242,11 +242,11 @@ export default function GrcServicesPage() {
             {riskAreas.map((area, idx) => (
               <li key={area.title} className="reveal bg-white border border-slate-200 rounded-2xl px-5 py-4">
                 <p className="font-semibold text-slate-900"><span className="text-ssg-red mr-2">{idx + 1}</span>{area.title}</p>
-                <p className="mt-1.5 text-slate-600 text-sm leading-relaxed">{area.description}</p>
+                <p className="mt-1.5 text-slate-600 text-sm leading-relaxed text-justify hyphens-auto">{area.description}</p>
               </li>
             ))}
           </ul>
-          <p className="reveal mt-6 rounded-xl border border-slate-200 border-l-4 border-l-ssg-red bg-white px-6 py-5 text-slate-700 text-base lg:text-lg leading-relaxed md:text-justify">
+          <p className="reveal mt-6 rounded-xl border border-slate-200 border-l-4 border-l-ssg-red bg-white px-6 py-5 text-slate-700 text-base lg:text-lg leading-relaxed text-justify hyphens-auto">
             This structured approach helps organisations focus their security efforts where it matters the most.
           </p>
         </div>
@@ -264,7 +264,7 @@ export default function GrcServicesPage() {
               <div key={item.title} className="reveal bg-white border border-slate-200 rounded-xl p-6 hover:shadow-lg transition-shadow">
                 <IconTile icon={item.icon} />
                 <h3 className="mt-4 font-bold text-slate-900 text-[1.05rem] leading-snug">{item.title}</h3>
-                <p className="mt-2 text-slate-600 text-[0.95rem] leading-relaxed">{item.description}</p>
+                <p className="mt-2 text-slate-600 text-[0.95rem] leading-relaxed text-justify hyphens-auto">{item.description}</p>
               </div>
             ))}
           </div>
@@ -287,7 +287,7 @@ export default function GrcServicesPage() {
                   <span aria-hidden="true" className="hidden lg:block absolute top-5 left-14 -right-2 h-px bg-white/20"></span>
                 )}
                 <h3 className="mt-5 text-white font-semibold text-lg leading-snug"><span className="sr-only">{idx + 1}. </span>{step.title}</h3>
-                <p className="mt-2 text-slate-300 text-[0.8125rem] leading-relaxed">{step.description}</p>
+                <p className="mt-2 text-slate-300 text-[0.8125rem] leading-relaxed text-justify hyphens-auto">{step.description}</p>
               </li>
             ))}
           </ol>
@@ -307,7 +307,7 @@ export default function GrcServicesPage() {
                 <h3 className="flex items-center gap-2.5 font-bold text-slate-900 text-[1.05rem] leading-snug">
                   <i className={`ph ${item.icon} text-xl text-[#1e3a8a]`}></i>{item.title}
                 </h3>
-                <p className="mt-2.5 text-slate-600 text-[0.95rem] leading-relaxed">{item.description}</p>
+                <p className="mt-2.5 text-slate-600 text-[0.95rem] leading-relaxed text-justify hyphens-auto">{item.description}</p>
               </div>
             ))}
           </div>
@@ -325,7 +325,7 @@ export default function GrcServicesPage() {
             {whyChoose.map((item) => (
               <div key={item.icon} className="reveal bg-white border border-slate-200 rounded-xl p-6 hover:shadow-lg transition-shadow">
                 <IconTile icon={item.icon} />
-                <p className="mt-4 text-slate-600 text-[0.95rem] leading-relaxed">{item.text}</p>
+                <p className="mt-4 text-slate-600 text-[0.95rem] leading-relaxed text-justify hyphens-auto">{item.text}</p>
               </div>
             ))}
           </div>
@@ -345,7 +345,7 @@ export default function GrcServicesPage() {
                   <i className="ph-fill ph-caret-right mt-1 text-sm text-slate-900 transition-transform group-open:rotate-90"></i>
                   <h3 className="font-semibold text-slate-900 text-lg leading-snug">{faq.question}</h3>
                 </summary>
-                <div className="pb-5 pl-7 space-y-3 text-slate-600 leading-relaxed">
+                <div className="pb-5 pl-7 space-y-3 text-slate-600 leading-relaxed text-justify hyphens-auto">
                   {faq.answer.map((para) => <p key={para}>{para}</p>)}
                 </div>
               </details>
@@ -359,7 +359,7 @@ export default function GrcServicesPage() {
         <div className={`${CONTAINER} grid lg:grid-cols-2 gap-12 items-stretch`}>
           <div className="reveal">
             <h2 className="text-white text-3xl lg:text-[2.35rem] font-bold leading-tight">Discuss Your Governance, Risk and Compliance Requirements</h2>
-            <div className="mt-5 space-y-4 text-slate-300 text-base lg:text-lg leading-relaxed">
+            <div className="mt-5 space-y-4 text-slate-300 text-base lg:text-lg leading-relaxed text-justify hyphens-auto">
               <p>Not sure whether your current security setup can handle new threats? Are you worried about risk or security concerns in your IT infrastructure or applications? Let&apos;s have an audit call with our team and let&apos;s find out what needs attention.</p>
               <p>Ssquad Global keeps things practical with cybersecurity risk assessments, governance reviews, regulatory guidance, and audit preparation support.</p>
               <p>Drop us a line to discuss your requirements.</p>
