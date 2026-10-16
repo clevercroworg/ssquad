@@ -304,15 +304,15 @@ export default function GrcServicesPage() {
             title="Our GRC Consulting Approach"
             intro="Each and every business has different IT infrastructure, security risks, and regulatory responsibilities. Our process GRC Consulting begins by understanding those differences before recommending improvements."
           />
-          <ol className="mt-12 grid sm:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-5">
+          <ol className="mt-12">
             {approachSteps.map((step, idx) => (
-              <li key={step.title} className="reveal relative">
-                <span aria-hidden="true" className="relative z-10 w-10 h-10 rounded-full bg-ssg-red text-white font-bold flex items-center justify-center">{idx + 1}</span>
+              <li key={step.title} className="reveal relative grid grid-cols-[2.5rem_1fr] gap-x-5 lg:grid-cols-[2.5rem_17rem_1fr] lg:gap-x-8 pb-8 last:pb-0">
                 {idx < approachSteps.length - 1 && (
-                  <span aria-hidden="true" className="hidden lg:block absolute top-5 left-14 -right-2 h-px bg-white/20"></span>
+                  <span aria-hidden="true" className="absolute left-5 top-10 bottom-0 w-px bg-white/20"></span>
                 )}
-                <h3 className="mt-5 text-white font-semibold text-lg leading-snug"><span className="sr-only">{idx + 1}. </span>{step.title}</h3>
-                <p className="mt-2 text-slate-300 text-[0.8125rem] leading-relaxed text-justify hyphens-auto">{step.description}</p>
+                <span aria-hidden="true" className="relative z-10 w-10 h-10 rounded-full bg-ssg-red text-white font-bold flex items-center justify-center">{idx + 1}</span>
+                <h3 className="pt-1.5 text-white font-semibold text-lg leading-snug"><span className="sr-only">{idx + 1}. </span>{step.title}</h3>
+                <p className="col-start-2 lg:col-start-3 mt-2 lg:mt-0 lg:pt-1.5 text-slate-300 text-[0.95rem] leading-relaxed text-justify hyphens-auto">{step.description}</p>
               </li>
             ))}
           </ol>
