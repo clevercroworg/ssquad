@@ -12,7 +12,7 @@ const HERO_BG = "bg-[#0b1530] bg-[radial-gradient(ellipse_at_10%_100%,rgba(236,3
 function SectionIntro({ title, intro, dark = false }: { title: string; intro?: string; dark?: boolean }) {
   return (
     <div className="reveal">
-      <h2 className={`text-3xl lg:text-[2.35rem] font-bold leading-tight ${dark ? 'text-white' : 'text-slate-900'}`}>{title}</h2>
+      <h2 className={`text-3xl lg:text-[2rem] font-bold leading-tight ${dark ? 'text-white' : 'text-slate-900'}`}>{title}</h2>
       {intro && <p className={`mt-4 text-base lg:text-lg leading-relaxed text-justify hyphens-auto ${dark ? 'text-slate-300' : 'text-slate-600'}`}>{intro}</p>}
     </div>
   );
@@ -199,20 +199,20 @@ export default function GrcServicesPage() {
             </div>
           </div>
 
-          <div className="rounded-2xl border border-white/15 bg-white/[0.06] backdrop-blur-sm p-6 sm:p-7">
+          <div className="rounded-2xl border border-white/15 bg-white/[0.06] backdrop-blur-sm p-5 sm:p-6">
             <p className="text-xs font-semibold tracking-[0.14em] uppercase text-slate-300">The three pillars of GRC</p>
-            <div className="mt-5 space-y-3">
+            <div className="mt-4 space-y-2.5">
               {pillars.map((pillar) => (
-                <div key={pillar.letter} className="flex items-center gap-4 rounded-xl border border-white/15 bg-white/[0.07] p-4">
-                  <span className={`${pillar.color} w-11 h-11 rounded-lg text-white font-bold text-lg flex items-center justify-center shrink-0`}>{pillar.letter}</span>
+                <div key={pillar.letter} className="flex items-center gap-4 rounded-xl border border-white/15 bg-white/[0.07] px-4 py-3">
+                  <span className={`${pillar.color} w-10 h-10 rounded-lg text-white font-bold flex items-center justify-center shrink-0`}>{pillar.letter}</span>
                   <div>
-                    <p className={`${HEADING_FONT} text-white font-semibold text-lg`}>{pillar.title}</p>
-                    <p className="text-slate-300 text-sm leading-relaxed">{pillar.text}</p>
+                    <p className={`${HEADING_FONT} text-white font-semibold`}>{pillar.title}</p>
+                    <p className="text-slate-300 text-[0.8125rem] leading-snug">{pillar.text}</p>
                   </div>
                 </div>
               ))}
             </div>
-            <div className="mt-5 pt-4 border-t border-white/10 flex flex-wrap gap-x-5 gap-y-2 text-sm font-semibold text-[#4ade80]">
+            <div className="mt-4 pt-3 border-t border-white/10 flex flex-wrap gap-x-4 gap-y-1.5 text-[0.8125rem] font-semibold text-[#4ade80]">
               <span><i className="ph ph-check mr-1"></i>Practical, hands-on consulting</span>
               <span><i className="ph ph-check mr-1"></i>Audit-ready evidence</span>
             </div>
@@ -361,7 +361,7 @@ export default function GrcServicesPage() {
       <section className={`bg-white ${SECTION}`}>
         <div className={`${CONTAINER} grid lg:grid-cols-[5fr_7fr] gap-10 lg:gap-16`}>
           <div className="reveal">
-            <h2 className="text-3xl lg:text-[2.35rem] font-bold leading-tight text-slate-900">Frequently Asked Questions</h2>
+            <h2 className="text-3xl lg:text-[2rem] font-bold leading-tight text-slate-900">Frequently Asked Questions</h2>
           </div>
           <div className="reveal">
             {faqs.map((faq, idx) => (
@@ -383,7 +383,7 @@ export default function GrcServicesPage() {
       <section className={`${HERO_BG} ${SECTION}`}>
         <div className={`${CONTAINER} grid lg:grid-cols-2 gap-12 items-stretch`}>
           <div className="reveal">
-            <h2 className="text-white text-3xl lg:text-[2.35rem] font-bold leading-tight">Discuss Your Governance, Risk and Compliance Requirements</h2>
+            <h2 className="text-white text-3xl lg:text-[2rem] font-bold leading-tight">Discuss Your Governance, Risk and Compliance Requirements</h2>
             <div className="mt-5 space-y-4 text-slate-300 text-base lg:text-lg leading-relaxed text-justify hyphens-auto">
               <p>Not sure whether your current security setup can handle new threats? Are you worried about risk or security concerns in your IT infrastructure or applications? Let&apos;s have an audit call with our team and let&apos;s find out what needs attention.</p>
               <p>Ssquad Global keeps things practical with cybersecurity risk assessments, governance reviews, regulatory guidance, and audit preparation support.</p>
