@@ -85,8 +85,8 @@ const industries = [
 
 const whyChoose = [
   { icon: "ph-stack", text: "Ssquad Global arranges cybersecurity examination, vulnerability management, penetration testing, cloud security, and managed security capabilities with governance and regulatory alignment support." },
-  { icon: "ph-scales", text: "Our work addresses technology risk management requirements relevant to Malaysia and Singapore, including RMiT and MAS TRM." },
-  { icon: "ph-globe-hemisphere-east", text: "With headquarters in Singapore, operations in Malaysia, and centres of excellence in India, Ssquad Global supports organisations across international markets. Our managed security capabilities can also provide ongoing monitoring support where required." }
+  { icon: "ph-scales", text: "Our work covers technology risk management requirements, including RMiT and MAS TRM, keeping your security controls aligned with regulatory expectations." },
+  { icon: "ph-globe-hemisphere-east", text: "Ssquad Global supports organisations across international markets, working alongside your team. Our managed security capabilities can also provide ongoing monitoring support where required." }
 ];
 
 const faqs = [
@@ -256,7 +256,7 @@ export default function GrcServicesPage() {
       </section>
 
       {/* GRC Consulting Services */}
-      <section id="grc-solutions" className={`bg-slate-50 scroll-mt-4 ${SECTION}`}>
+      <section className={`bg-slate-50 ${SECTION}`}>
         <div className={CONTAINER}>
           <SectionIntro
             title="Our GRC Consulting Services"
@@ -288,7 +288,7 @@ export default function GrcServicesPage() {
       </section>
 
       {/* Enterprise GRC Solutions */}
-      <section className={`bg-white ${SECTION}`}>
+      <section id="grc-solutions" className={`bg-white scroll-mt-4 ${SECTION}`}>
         <div className={CONTAINER}>
           <SectionIntro
             title="Enterprise GRC Solutions"
