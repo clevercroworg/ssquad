@@ -26,6 +26,12 @@ function IconTile({ icon }: { icon: string }) {
   );
 }
 
+const pillars = [
+  { letter: "G", color: "bg-[#2f6fde]", title: "Governance", text: "Clear ownership, current policies and accountable decisions." },
+  { letter: "R", color: "bg-ssg-red", title: "Risk", text: "Find, rank and treat the risks that matter to your business." },
+  { letter: "C", color: "bg-[#1fa971]", title: "Compliance", text: "Meet ISO 27001, SOC 2, PCI-DSS 4.0, RMiT and MAS TRM." }
+];
+
 const challenges = [
   { icon: "ph-user", title: "Unclear Enterprise Risk Ownership", description: "Nobody is explicitly put in charge, ownership needs to be clearly assigned when a security gap gets flagged, leaving important fixes hanging." },
   { icon: "ph-warning", title: "Compliance Gaps", description: "Daily processes, tools, and configurations may fall short of regulatory requirements." },
@@ -178,18 +184,37 @@ export default function GrcServicesPage() {
   return (
     <main className="bg-white">
       {/* Hero */}
-      <section className={`${HERO_BG} pt-36 pb-20 lg:pt-44 lg:pb-28`}>
-        <div className={CONTAINER}>
-          <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-white text-4xl sm:text-5xl lg:text-[3.6rem] font-bold leading-[1.1] tracking-tight">
+      <section className={`${HERO_BG} pt-36 pb-20 lg:pt-44 lg:pb-24`}>
+        <div className={`${CONTAINER} grid lg:grid-cols-[1.1fr_0.9fr] gap-12 lg:gap-14 items-center`}>
+          <div>
+            <h1 className="text-white text-4xl sm:text-5xl lg:text-[3.4rem] font-bold leading-[1.1] tracking-tight">
               Governance, Risk &amp; Compliance <span className="text-[#ff6b78]">Services</span>
             </h1>
             <p className="mt-6 text-slate-300 text-base lg:text-lg leading-relaxed text-justify hyphens-auto">
               Worried about security gaps and changing compliance requirements? Ssquad Global helps review your business&apos;s security controls, identify IT infrastructure risks, and update internal Enterprise Risk policies. Our GRC consulting team works alongside yours to find practical solutions and improve compliance readiness.
             </p>
-            <div className="mt-8 flex flex-col sm:flex-row justify-center gap-3">
+            <div className="mt-8 flex flex-col sm:flex-row gap-3">
               <a href="#grc-consultation" className="inline-flex justify-center items-center bg-ssg-red hover:bg-red-600 text-white font-semibold px-6 py-3.5 rounded-md transition-colors">Request a GRC Consultation</a>
               <Link href="/contact" className="inline-flex justify-center items-center border border-white/50 hover:bg-white/10 text-white font-semibold px-6 py-3.5 rounded-md transition-colors">Talk to a GRC Consultant</Link>
+            </div>
+          </div>
+
+          <div className="rounded-2xl border border-white/15 bg-white/[0.06] backdrop-blur-sm p-6 sm:p-7">
+            <p className="text-xs font-semibold tracking-[0.14em] uppercase text-slate-300">The three pillars of GRC</p>
+            <div className="mt-5 space-y-3">
+              {pillars.map((pillar) => (
+                <div key={pillar.letter} className="flex items-center gap-4 rounded-xl border border-white/15 bg-white/[0.07] p-4">
+                  <span className={`${pillar.color} w-11 h-11 rounded-lg text-white font-bold text-lg flex items-center justify-center shrink-0`}>{pillar.letter}</span>
+                  <div>
+                    <p className={`${HEADING_FONT} text-white font-semibold text-lg`}>{pillar.title}</p>
+                    <p className="text-slate-300 text-sm leading-relaxed">{pillar.text}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="mt-5 pt-4 border-t border-white/10 flex flex-wrap gap-x-5 gap-y-2 text-sm font-semibold text-[#4ade80]">
+              <span><i className="ph ph-check mr-1"></i>Practical, hands-on consulting</span>
+              <span><i className="ph ph-check mr-1"></i>Audit-ready evidence</span>
             </div>
           </div>
         </div>
