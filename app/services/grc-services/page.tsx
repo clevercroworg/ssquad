@@ -205,7 +205,7 @@ export default function GrcServicesPage() {
             </p>
             <div className="mt-8 flex flex-col sm:flex-row gap-3">
               <a href="#grc-consultation" className="inline-flex justify-center items-center bg-ssg-red hover:bg-red-600 text-white font-semibold px-6 py-3.5 rounded-md transition-colors">Request a GRC Consultation</a>
-              <Link href="/contact" className="inline-flex justify-center items-center border border-white/50 hover:bg-white/10 text-white font-semibold px-6 py-3.5 rounded-md transition-colors">Talk to a GRC Consultant</Link>
+              <a href="#grc-solutions" className="inline-flex justify-center items-center border border-white/50 hover:bg-white/10 text-white font-semibold px-6 py-3.5 rounded-md transition-colors">Discover our GRC solution</a>
             </div>
           </div>
 
@@ -256,7 +256,7 @@ export default function GrcServicesPage() {
       </section>
 
       {/* GRC Consulting Services */}
-      <section className={`bg-slate-50 ${SECTION}`}>
+      <section id="grc-solutions" className={`bg-slate-50 scroll-mt-4 ${SECTION}`}>
         <div className={CONTAINER}>
           <SectionIntro
             title="Our GRC Consulting Services"
