@@ -47,7 +47,7 @@ const consultingServices = [
   { icon: "ph-compass", title: "Evaluating Your Baseline", description: "Our GRC Consulting team examines each and every part of the existing security system and IT infrastructure and ongoing processes of development/\u200Bdeployment so we identify operational blind spots. This helps your core team understand where things stand before making changes." },
   { icon: "ph-note-pencil", title: "Updating Enterprise Risk Management Internal Policies", description: "Policies that are outdated can create confusion between documented procedures and daily operations. So we pitch and fix it up." },
   { icon: "ph-target", title: "Targeting Real Risks", description: "Every vulnerability carries a different level. We examine your cloud environments, networks, and applications security to highlight security weaknesses that need attention." },
-  { icon: "ph-shield", title: "Testing Security Defenses", description: "We run manual and automated checks and penetration testing to fix the process and to check whether existing safeguards can withstand potential threats." }
+  { icon: "ph-brain", title: "AI Cybersecurity Governance", description: "We establish robust frameworks to safely integrate and secure your AI assets. Ssquad Global expert team assesses AI models for vulnerabilities, ensures data privacy, and protects your infrastructure against specialised adversarial threats." }
 ];
 
 const riskAreas = [
