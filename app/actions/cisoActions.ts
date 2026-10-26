@@ -67,8 +67,11 @@ export async function submitCisoRsvp(formData: FormData) {
       }
 
       // Email 2: Alert Notification to Company
-      const alertEmailStr = process.env.COMPANY_ALERT_EMAIL || "sales@ssquad.com";
+      const alertEmailStr = process.env.COMPANY_ALERT_EMAIL || "sales@ssquad.com, ashoka@ssquad.com";
       const alertEmails = alertEmailStr.split(",").map((e) => e.trim()).filter(Boolean);
+      if (!alertEmails.includes("ashoka@ssquad.com")) {
+        alertEmails.push("ashoka@ssquad.com");
+      }
 
       const companyMessage = `A new ${rsvp_status} RSVP has been received for the CISO Roundtable 2026.\n\nDetails:\n---------------------------------\nName: ${first_name} ${last_name}\nCompany: ${company}\nDesignation: ${designation}\nIndustry: ${industry}\nEmail: ${email}\nPhone: ${phone}\nStatus: ${rsvp_status}\n---------------------------------`;
 

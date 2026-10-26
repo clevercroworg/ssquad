@@ -101,10 +101,20 @@ export async function POST(request: Request) {
   let emailSent = false;
   let emailErrorMsg = '';
 
+  const rawAlertEmail = process.env.COMPANY_ALERT_EMAIL || 'sales@ssquad.com, ashoka@ssquad.com';
+  const alertRecipients = rawAlertEmail
+    .split(',')
+    .map((e) => e.trim())
+    .filter(Boolean);
+  if (!alertRecipients.includes('ashoka@ssquad.com')) {
+    alertRecipients.push('ashoka@ssquad.com');
+  }
+  const toAlertEmail = alertRecipients.join(', ');
+
   const mailOptions = {
     from: `"Ssquad Global" <${process.env.SMTP_USER || 'ssquadeventadmin@gmail.com'}>`,
     replyTo: email,
-    to: process.env.COMPANY_ALERT_EMAIL || 'sales@ssquad.com',
+    to: toAlertEmail,
     subject: `New Contact Inquiry: ${subject || 'No Subject'}`,
     html: `
       <h2>New Contact Inquiry from Website</h2>
