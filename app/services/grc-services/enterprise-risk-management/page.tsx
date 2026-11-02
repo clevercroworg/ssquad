@@ -13,21 +13,30 @@ const inputClass = "w-full bg-white text-slate-900 border border-slate-300 round
 const challenges = [
   {
     icon: "ph-shield-warning",
+    tag: "UNSEEN VULNERABILITIES",
     title: "Cybersecurity Risks",
     quote: "The actual issue is not the threats we know, but the threats in our systems that remain unidentified.",
-    accent: "border-t-[#EC2024]"
+    description: "Weak spots often sit in old systems, forgotten connections or settings that changed over time. Regular security tools can miss these, and attackers look for exactly this kind of gap.",
+    accent: "border-t-[#EC2024]",
+    tagBg: "bg-red-50 text-[#EC2024] border-red-200"
   },
   {
     icon: "ph-activity",
+    tag: "CASCADING DOWNTIME",
     title: "Operational Disruptions",
     quote: "When important applications stop working or infrastructure fails unexpectedly, daily business activities may be interrupted, affecting employees, customers, and service delivery.",
-    accent: "border-t-[#F59E0B]"
+    description: "Many business systems depend on each other and on outside vendors. If one of them fails, the problem can spread to other teams and affect your revenue and your customers.",
+    accent: "border-t-[#F59E0B]",
+    tagBg: "bg-amber-50 text-[#D97706] border-amber-200"
   },
   {
     icon: "ph-scales",
+    tag: "REGULATORY COMPLIANCE",
     title: "Regulatory Compliance",
     quote: "As our systems continue to grow, it becomes increasingly difficult to maintain compliance with governance rules and audit requirements.",
-    accent: "border-t-[#0284C7]"
+    description: "Regulators expect proof that your controls work all year, not only at audit time. This applies to standards such as RMiT, MAS TRM, ISO 27001 and SOC 2.",
+    accent: "border-t-[#0284C7]",
+    tagBg: "bg-blue-50 text-[#0284C7] border-blue-200"
   }
 ];
 
@@ -36,27 +45,57 @@ const strategicServices = [
   {
     icon: "ph-magnifying-glass-plus",
     title: "Enterprise Risk Assessment",
-    description: "Our expert team of enterprise risk assessment will approach and identify vulnerabilities across IT infrastructure, cloud platforms, production applications, and security controls to determine potential operational threats."
+    description: "Our expert team of enterprise risk assessment will approach and identify vulnerabilities across IT infrastructure, cloud platforms, production applications, and security controls to determine potential operational threats.",
+    points: [
+      "Checks across your IT systems and cloud platforms",
+      "Security review of web, mobile and API applications",
+      "Comparison with international security controls"
+    ],
+    tag: "DISCOVERY & AUDIT"
   },
   {
     icon: "ph-tree-structure",
     title: "Enterprise Risk Management Framework",
-    description: "We support organisations to develop their own systematic Enterprise Risk Management framework to identify risk and evaluate accountability aligned with business priorities."
+    description: "We support organisations to develop their own systematic Enterprise Risk Management framework to identify risk and evaluate accountability aligned with business priorities.",
+    points: [
+      "Risk categories and limits set for your business",
+      "Clear owners for each risk",
+      "Regular risk reports for your leadership"
+    ],
+    tag: "GOVERNANCE MODEL"
   },
   {
     icon: "ph-arrows-clockwise",
     title: "Enterprise Risk Assessment Process",
-    description: "Our system for enterprise risk assessment flows examines potential risks, evaluates their impact, and prioritizes appropriate risk treatment measures."
+    description: "Our system for enterprise risk assessment flows examines potential risks, evaluates their impact, and prioritizes appropriate risk treatment measures.",
+    points: [
+      "A simple way to classify each threat",
+      "Scoring by financial and operational impact",
+      "A clear plan to treat each risk"
+    ],
+    tag: "WORKFLOW & PROCESS"
   },
   {
     icon: "ph-lock-key",
     title: "Cybersecurity Risk Management",
-    description: "We identify security visibility through threat management, vulnerability intelligence and priority recommendations for fixes."
+    description: "We identify security visibility through threat management, vulnerability intelligence and priority recommendations for fixes.",
+    points: [
+      "Review of where your systems can be attacked",
+      "Checks on how likely each weakness is to be used",
+      "Fix steps your engineers can follow"
+    ],
+    tag: "DEFENSE VISIBILITY"
   },
   {
     icon: "ph-bank",
     title: "Regulatory Risk and Governance",
-    description: "We have a track record of handling infrastructure for financial and banking systems with RMiT requirements and MAS Technology Risk Management governance guidelines."
+    description: "We have a track record of handling infrastructure for financial and banking systems with RMiT requirements and MAS Technology Risk Management governance guidelines.",
+    points: [
+      "Bank Negara Malaysia RMiT gap review and fixes",
+      "Support with MAS TRM guidelines",
+      "Support for ISO 27001, SOC 2 Type II and PCI-DSS 4.0"
+    ],
+    tag: "CENTRAL BANK COMPLIANT"
   }
 ];
 
@@ -65,27 +104,56 @@ const approachSteps = [
   {
     number: "01",
     title: "Identify Risks",
-    description: "Examine business activities, identify the gaps, and find the potential threats across the system."
+    description: "Examine business activities, identify the gaps, and find the potential threats across the system.",
+    detail: "We cover cloud systems, on-site infrastructure, SaaS tools and developer workflows."
   },
   {
     number: "02",
     title: "Examine Impact",
-    description: "Our Enterprise Risk Management expert team evaluate operational consequences, security exposure, and business dependencies."
+    description: "Our Enterprise Risk Management expert team evaluate operational consequences, security exposure, and business dependencies.",
+    detail: "We check how each issue could affect customer services and finances."
   },
   {
     number: "03",
     title: "Prioritise Risks",
-    description: "Classifying risks according to their potential impact and organizational priorities."
+    description: "Classifying risks according to their potential impact and organizational priorities.",
+    detail: "Serious risks are separated from minor ones, so leadership sees what matters."
   },
   {
     number: "04",
     title: "Recommend Controls",
-    description: "Develop practical mitigation recommendations and governance improvements."
+    description: "Develop practical mitigation recommendations and governance improvements.",
+    detail: "You get clear fix steps, policy changes and advice on strengthening your systems."
   },
   {
     number: "05",
     title: "Review Risk Posture",
-    description: "Support ongoing risk visibility through reporting and periodic assessments."
+    description: "Support ongoing risk visibility through reporting and periodic assessments.",
+    detail: "We review progress and share reports your leadership and auditors can use."
+  }
+];
+
+// Why choose Ssquad points
+const whyChoosePoints = [
+  {
+    icon: "ph-intersect",
+    title: "Cyber and Infrastructure Experience",
+    description: "Our team works across cybersecurity, cloud infrastructure and governance, so we can look at risk across your whole business."
+  },
+  {
+    icon: "ph-shield-check",
+    title: "Regulatory Experience",
+    description: "We have hands-on experience with Bank Negara Malaysia RMiT, MAS TRM, ISO 27001, SOC 2 and PCI-DSS 4.0."
+  },
+  {
+    icon: "ph-globe-hemisphere-east",
+    title: "Delivery Across Regions",
+    description: "Our teams work across several countries and follow local data privacy rules."
+  },
+  {
+    icon: "ph-wrench",
+    title: "Practical Advice",
+    description: "You get clear fixes your engineers can act on, and we stay involved to help resolve each risk."
   }
 ];
 
@@ -217,6 +285,9 @@ export default function EnterpriseRiskManagementPage() {
       <section className={`bg-white ${SECTION}`}>
         <div className={CONTAINER}>
           <div className="reveal max-w-3xl">
+            <div className="inline-flex items-center gap-2 bg-ssg-red/10 border border-ssg-red/20 text-ssg-red rounded-full px-3.5 py-1 text-xs font-semibold uppercase tracking-wider mb-3">
+              <i className="ph-fill ph-warning"></i> SYSTEMIC RISK LANDSCAPE
+            </div>
             <h2 className="text-2xl sm:text-3xl lg:text-[2.25rem] font-bold text-slate-900 leading-tight">
               Common Enterprise Risk Management Challenges Faced by Businesses
             </h2>
@@ -233,17 +304,33 @@ export default function EnterpriseRiskManagementPage() {
                 style={{ transitionDelay: `${i * 80}ms` }}
               >
                 <div>
-                  <span className="w-12 h-12 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-slate-800 text-2xl shadow-sm mb-4">
-                    <i className={`ph ${c.icon}`}></i>
-                  </span>
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="w-12 h-12 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-slate-800 text-2xl shadow-sm">
+                      <i className={`ph ${c.icon}`}></i>
+                    </span>
+                    <span className={`text-[10px] font-mono font-bold tracking-wider px-2.5 py-1 rounded-md border ${c.tagBg}`}>
+                      {c.tag}
+                    </span>
+                  </div>
 
                   <h3 className="text-lg sm:text-xl font-bold text-slate-900 leading-snug">
                     {c.title}
                   </h3>
 
-                  <p className="mt-3 text-slate-600 text-xs sm:text-sm leading-relaxed text-left">
-                    {c.quote}
+                  <div className="mt-3.5 p-3 sm:p-3.5 rounded-xl bg-white border border-slate-200 text-xs sm:text-[13px] italic text-slate-700 leading-relaxed font-medium">
+                    &ldquo;{c.quote}&rdquo;
+                  </div>
+
+                  <p className="mt-3.5 text-slate-600 text-xs sm:text-sm leading-relaxed text-left">
+                    {c.description}
                   </p>
+                </div>
+
+                <div className="mt-6 pt-4 border-t border-slate-200 flex items-center justify-between text-xs font-semibold text-slate-500">
+                  <span>RISK DOMAIN // 0{i + 1}</span>
+                  <a href="#risk-consultation" className="text-ssg-red hover:underline inline-flex items-center gap-1 font-bold">
+                    Mitigate gap <i className="ph ph-arrow-right"></i>
+                  </a>
                 </div>
               </div>
             ))}
@@ -255,6 +342,9 @@ export default function EnterpriseRiskManagementPage() {
       <section id="strategic-services" className={`bg-slate-50 border-y border-slate-200 scroll-mt-6 ${SECTION}`}>
         <div className={CONTAINER}>
           <div className="reveal text-center max-w-3xl mx-auto">
+            <div className="inline-flex items-center gap-2 bg-[#2f6fde]/10 border border-[#2f6fde]/20 text-[#2f6fde] rounded-full px-3.5 py-1 text-xs font-semibold uppercase tracking-wider mb-3">
+              <i className="ph-fill ph-check-circle"></i> STRATEGIC ADVISORY MATRIX
+            </div>
             <h2 className="text-2xl sm:text-3xl lg:text-[2.25rem] font-bold text-slate-900 leading-tight">
               Strategic Risk Management Consulting Services for Enterprises
             </h2>
@@ -263,17 +353,22 @@ export default function EnterpriseRiskManagementPage() {
             </p>
           </div>
 
-          <div className="mt-8 sm:mt-12 flex flex-wrap justify-center gap-6">
+          <div className="mt-8 sm:mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 items-stretch">
             {strategicServices.map((service, idx) => (
               <div
                 key={service.title}
-                className="reveal w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)] bg-white border border-slate-200 rounded-2xl p-5 sm:p-6 lg:p-7 shadow-sm hover:shadow-xl hover:border-ssg-red/30 transition-all duration-300 group"
+                className="reveal bg-white border border-slate-200 rounded-2xl p-5 sm:p-6 lg:p-7 shadow-sm hover:shadow-xl hover:border-ssg-red/30 transition-all duration-300 flex flex-col justify-between group h-full"
                 style={{ transitionDelay: `${idx * 60}ms` }}
               >
                 <div>
-                  <span className="w-12 h-12 rounded-xl bg-red-50 text-ssg-red border border-red-100 flex items-center justify-center text-2xl mb-4 group-hover:bg-ssg-red group-hover:text-white transition-colors">
-                    <i className={`ph ${service.icon}`}></i>
-                  </span>
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="w-12 h-12 rounded-xl bg-red-50 text-ssg-red border border-red-100 flex items-center justify-center text-2xl group-hover:bg-ssg-red group-hover:text-white transition-colors">
+                      <i className={`ph ${service.icon}`}></i>
+                    </span>
+                    <span className="text-[10px] font-mono font-bold tracking-wider px-2.5 py-1 rounded-md bg-slate-100 text-slate-700 border border-slate-200">
+                      {service.tag}
+                    </span>
+                  </div>
 
                   <h3 className="text-lg sm:text-xl font-bold text-slate-900 leading-snug group-hover:text-ssg-red transition-colors">
                     {service.title}
@@ -283,9 +378,53 @@ export default function EnterpriseRiskManagementPage() {
                     {service.description}
                   </p>
 
+                  <ul className="mt-5 space-y-2.5 pt-4 border-t border-slate-100">
+                    {service.points.map((pt, pIdx) => (
+                      <li key={pIdx} className="flex items-start gap-2 text-xs sm:text-[13px] text-slate-700 leading-snug">
+                        <i className="ph-bold ph-check text-emerald-600 mt-0.5 shrink-0"></i>
+                        <span>{pt}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="mt-6 pt-3 border-t border-slate-100">
+                  <a
+                    href="#risk-consultation"
+                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-900 group-hover:text-ssg-red transition-colors"
+                  >
+                    Consult with specialists <i className="ph ph-arrow-right"></i>
+                  </a>
                 </div>
               </div>
             ))}
+
+            {/* Custom CTA Card within Grid */}
+            <div className="reveal bg-gradient-to-br from-[#0b1530] to-[#12224d] rounded-2xl p-5 sm:p-6 lg:p-7 text-white shadow-xl flex flex-col justify-between border border-white/10 h-full">
+              <div>
+                <span className="w-12 h-12 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center text-ssg-red text-2xl mb-4">
+                  <i className="ph ph-headset"></i>
+                </span>
+                <span className="text-[10px] font-mono font-bold tracking-widest text-[#4ade80] uppercase">
+                  DIRECT ADVISORY ACCESS
+                </span>
+                <h3 className="mt-2 text-lg sm:text-xl font-bold leading-snug text-white">
+                  Need a Customized Risk Assessment?
+                </h3>
+                <p className="mt-3 text-slate-300 text-xs sm:text-sm leading-relaxed text-left">
+                  Speak with our risk consultants about your systems, your RMiT requirements or your cloud setup.
+                </p>
+              </div>
+
+              <div className="mt-6 pt-4 border-t border-white/10">
+                <a
+                  href="#risk-consultation"
+                  className="w-full inline-flex items-center justify-center gap-2 bg-ssg-red hover:bg-red-600 text-white font-semibold text-xs sm:text-sm py-3 rounded-xl transition-colors"
+                >
+                  Request Consultation
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -294,9 +433,15 @@ export default function EnterpriseRiskManagementPage() {
       <section className={`bg-[#0b1631] text-white ${SECTION}`}>
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="reveal text-center max-w-3xl mx-auto">
+            <span className="inline-block text-xs font-bold tracking-[0.2em] uppercase text-ssg-red bg-ssg-red/10 border border-ssg-red/30 px-3.5 py-1.5 rounded-full mb-3">
+              METHODOLOGY &amp; LIFECYCLE
+            </span>
             <h2 className="text-2xl sm:text-3xl lg:text-[2.25rem] font-bold leading-tight text-white">
               Our Enterprise Risk Management Approach
             </h2>
+            <p className="mt-3 sm:mt-4 text-slate-300 text-sm sm:text-base lg:text-lg leading-relaxed text-center max-w-3xl mx-auto">
+              Five steps to find, measure, prioritise, treat and review risks across your business.
+            </p>
           </div>
 
           <div className="mt-8 sm:mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-5 lg:gap-6 items-stretch">
@@ -307,9 +452,14 @@ export default function EnterpriseRiskManagementPage() {
                 style={{ transitionDelay: `${idx * 60}ms` }}
               >
                 <div>
-                  <span className="block mb-4 font-mono text-2xl sm:text-3xl font-extrabold text-ssg-red">
-                    {step.number}
-                  </span>
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="font-mono text-2xl sm:text-3xl font-extrabold text-ssg-red">
+                      {step.number}
+                    </span>
+                    <span className="text-[10px] font-mono font-bold tracking-wider px-2 py-0.5 rounded bg-white/10 text-slate-300">
+                      PHASE
+                    </span>
+                  </div>
 
                   <h3 className="text-base sm:text-lg font-bold text-white leading-snug group-hover:text-red-400 transition-colors">
                     {step.title}
@@ -320,6 +470,9 @@ export default function EnterpriseRiskManagementPage() {
                   </p>
                 </div>
 
+                <div className="mt-5 pt-3.5 border-t border-white/10 text-[11px] text-slate-400 leading-normal">
+                  {step.detail}
+                </div>
               </div>
             ))}
           </div>
@@ -330,6 +483,9 @@ export default function EnterpriseRiskManagementPage() {
       <section className={`bg-white ${SECTION}`}>
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="reveal text-center max-w-3xl mx-auto">
+            <span className="inline-block text-xs font-bold tracking-[0.2em] uppercase text-ssg-red bg-ssg-red/10 border border-ssg-red/20 px-3.5 py-1.5 rounded-full mb-3">
+              THE SSQUAD ADVANTAGE
+            </span>
             <h2 className="text-2xl sm:text-3xl lg:text-[2.25rem] font-bold text-slate-900 leading-tight">
               Why Choose Ssquad Global?
             </h2>
@@ -338,6 +494,25 @@ export default function EnterpriseRiskManagementPage() {
             </p>
           </div>
 
+          <div className="mt-8 sm:mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 lg:gap-7 items-stretch">
+            {whyChoosePoints.map((point, idx) => (
+              <div
+                key={point.title}
+                className="reveal bg-slate-50 border border-slate-200 rounded-2xl p-6 sm:p-7 hover:border-ssg-red/30 hover:shadow-lg transition-all h-full flex flex-col"
+                style={{ transitionDelay: `${idx * 60}ms` }}
+              >
+                <span className="w-12 h-12 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-ssg-red text-2xl shadow-sm mb-4 sm:mb-5 shrink-0">
+                  <i className={`ph ${point.icon}`}></i>
+                </span>
+                <h3 className="text-base sm:text-lg font-bold text-slate-900 leading-snug">
+                  {point.title}
+                </h3>
+                <p className="mt-2.5 text-slate-600 text-xs sm:text-sm leading-relaxed text-left flex-1">
+                  {point.description}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -345,9 +520,15 @@ export default function EnterpriseRiskManagementPage() {
       <section className={`bg-slate-50 border-t border-slate-200 ${SECTION}`}>
         <div className={`${CONTAINER} max-w-4xl`}>
           <div className="reveal text-center mb-8 sm:mb-12">
+            <span className="inline-block text-xs font-bold tracking-[0.2em] uppercase text-ssg-red bg-ssg-red/10 border border-ssg-red/20 px-3.5 py-1.5 rounded-full mb-3">
+              CLARITY &amp; INSIGHTS
+            </span>
             <h2 className="text-2xl sm:text-3xl lg:text-[2.25rem] font-bold text-slate-900 leading-tight">
               Frequently Asked Questions
             </h2>
+            <p className="mt-2.5 sm:mt-3 text-slate-600 text-sm sm:text-base">
+              Common questions about our Enterprise Risk Management consulting.
+            </p>
           </div>
 
           <div className="space-y-3.5 sm:space-y-4">
@@ -391,6 +572,9 @@ export default function EnterpriseRiskManagementPage() {
         <div className={`${CONTAINER} grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10`}>
           {/* Left Column: Proposition & Direct Contacts */}
           <div className="lg:col-span-6 text-white reveal text-left">
+            <span className="inline-block text-xs font-mono font-bold tracking-[0.2em] uppercase text-red-400 bg-red-500/10 border border-red-500/30 px-3.5 py-1.5 rounded-full mb-4">
+              TAKE ACTION TODAY
+            </span>
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
               Strengthen Your Enterprise Risk Management Strategy
             </h2>
@@ -405,6 +589,7 @@ export default function EnterpriseRiskManagementPage() {
             <form onSubmit={handleSubmit} autoComplete="off" className="bg-white rounded-2xl sm:rounded-3xl p-5 sm:p-8 lg:p-9 shadow-2xl flex flex-col gap-3.5 sm:gap-4 border border-slate-100">
               <div>
                 <h3 className="text-lg sm:text-xl font-bold text-slate-900">Request a Risk Consultation</h3>
+                <p className="text-xs text-slate-500 mt-0.5">Share your requirements and our team will contact you.</p>
               </div>
 
               {/* Honeypot Trap */}
@@ -449,7 +634,7 @@ export default function EnterpriseRiskManagementPage() {
                   required
                   value={form.cmessage}
                   onChange={handleChange}
-                  placeholder="Your requirements"
+                  placeholder="Tell us about your systems and what you need help with"
                   className={`${inputClass} resize-none min-h-[6.5rem] sm:min-h-[7.5rem]`}
                 ></textarea>
               </div>
