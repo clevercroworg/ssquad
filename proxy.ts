@@ -15,8 +15,9 @@ export async function proxy(request: NextRequest) {
   //    - HTTP WWW: http://www.ssquad.com/* -> https://ssquad.com/*
   const isWww = host.toLowerCase().startsWith("www.");
   const isHttp = proto.toLowerCase() === "http";
+  const isSsquadHost = host.toLowerCase().includes("ssquad.com");
 
-  if (isWww || isHttp) {
+  if (isSsquadHost && (isWww || isHttp)) {
     const targetHost = "ssquad.com";
     const targetUrl = new URL(path + request.nextUrl.search, `https://${targetHost}`);
     return NextResponse.redirect(targetUrl, { status: 308 });

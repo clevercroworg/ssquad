@@ -53,6 +53,8 @@ const nextConfig: NextConfig = {
       { source: '/industry-cloud-solutions', destination: '/services/industry-cloud', permanent: true },
       { source: '/ai-powered-cybersecurity-solutions', destination: '/services/security-for-ai', permanent: true },
       { source: '/end-to-end-it-infrastructure-management', destination: '/services/infrastructure-management', permanent: true },
+      { source: '/services/enterprise-risk-management-services', destination: '/services/grc-services/enterprise-risk-management', permanent: true },
+      { source: '/services/grc-services/enterprise-risk-management-services', destination: '/services/grc-services/enterprise-risk-management', permanent: true },
     ];
   },
 };

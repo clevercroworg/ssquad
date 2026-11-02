@@ -197,6 +197,11 @@ export default function CisoRoundtable() {
                   )}
 
                   <form onSubmit={handleSubmit} className="space-y-6" autoComplete="off">
+                    {/* Invisible Honeypot Trap for Automated Spambots */}
+                    <div style={{ display: 'none', opacity: 0, position: 'absolute', left: '-9999px', height: 0, width: 0, zIndex: -1 }} aria-hidden="true">
+                      <input type="text" name="_hp_website" tabIndex={-1} autoComplete="off" defaultValue="" />
+                    </div>
+
                     {/* RSVP Status */}
                     <div className="ciso-form-group space-y-3">
                       <label className="ciso-form-label">RSVP <span className="text-ssg-red">*</span></label>

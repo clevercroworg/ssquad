@@ -6,14 +6,17 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "generate:video": "tsx index.ts"
   },
   "dependencies": {
+    "@higgsfield/client": "^0.2.6",
     "@phosphor-icons/web": "^2.1.2",
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.6.0",
     "@types/nodemailer": "^8.0.0",
     "bcryptjs": "^3.0.3",
+    "dotenv": "^18.0.1",
     "jose": "^6.2.3",
     "next": "16.2.9",
     "nodemailer": "^8.0.7",
@@ -34,6 +37,7 @@
     "lightningcss": "^1.32.0",
     "node-ssh": "^13.2.1",
     "tailwindcss": "^4",
+    "tsx": "^4.23.15",
     "typescript": "^5"
   }
 }

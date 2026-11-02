@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 import fs from 'fs';
 import path from 'path';
+import { getClientIp, checkIpRateLimit, evaluateSpamRules } from '@/app/lib/antiSpam';
 
 // Helper to save leads locally as a backup
 async function saveLeadBackup(leadData: any) {
@@ -70,18 +71,35 @@ async function postToGoogleSheets(leadData: any) {
 
 export async function POST(request: Request) {
   let name = '', email = '', number = '', subject = '', message = '';
+  let honeypot = '', timestamp: any = null;
   
+  // 1. IP Rate Limiting Check
+  const clientIp = getClientIp(request);
+  const rateLimit = checkIpRateLimit(clientIp);
+  if (!rateLimit.allowed) {
+    console.warn(`[ANTI-SPAM RATE LIMIT] Blocked excessive requests from IP: ${clientIp}`);
+    return NextResponse.json(
+      { error: `Too many inquiries received from this connection. Please try again in ${rateLimit.retryAfterSeconds || 60} seconds.` },
+      { status: 429 }
+    );
+  }
+
+  // 2. Parse Request Payload
   try {
     const body = await request.json();
-    name = body.name;
-    email = body.email;
-    number = body.number;
-    subject = body.subject;
-    message = body.message;
+    name = (body.name || '').trim();
+    email = (body.email || '').trim();
+    number = (body.number || '').trim();
+    subject = (body.subject || '').trim();
+    message = (body.message || '').trim();
+    // Catch honeypot fields across variations
+    honeypot = body._hp_company || body.company_fax || body.honeypot || body.website_url_hp || '';
+    timestamp = body._ts || body.timestamp;
   } catch (err) {
     return NextResponse.json({ error: 'Malformed request JSON' }, { status: 400 });
   }
 
+  // 3. Basic Field Requirement Check
   if (!name || !email || !message) {
     return NextResponse.json(
       { error: 'Name, email, and message are required fields.' },
@@ -89,15 +107,54 @@ export async function POST(request: Request) {
     );
   }
 
+  // 4. Multi-Layer Spam & Bot Evaluation
+  const spamResult = evaluateSpamRules({
+    name,
+    email,
+    subject,
+    message,
+    honeypot,
+    timestamp,
+  });
+
+  if (spamResult.isSpam) {
+    console.warn(`[ANTI-SPAM SHIELD] Blocked bot spam from ${clientIp}:`, {
+      reason: spamResult.reason,
+      lead: { name, email, subject, phone: number },
+    });
+
+    if (spamResult.shouldSilentDrop) {
+      // Deceive the bot by returning a 200 OK success response so it ceases retries,
+      // but drop the submission completely without sending any email or writing to DB.
+      return NextResponse.json(
+        { 
+          message: 'Transmission successful. We will contact you shortly.',
+          details: {
+            savedLocal: false,
+            savedCloud: false,
+            notified: false,
+            protected: true,
+          }
+        },
+        { status: 200 }
+      );
+    }
+
+    return NextResponse.json(
+      { error: spamResult.reason || 'Invalid inquiry submission.' },
+      { status: 400 }
+    );
+  }
+
   const leadInfo = { name, email, number, subject, message };
 
-  // 1. Save locally as fallback immediately
+  // 5. Save locally as fallback
   const localSaveSuccess = await saveLeadBackup(leadInfo);
   
-  // 2. Forward to Google Sheets in background
+  // 6. Forward to Google Sheets in background
   const sheetsStatus = await postToGoogleSheets(leadInfo);
 
-  // 3. Attempt Email Dispatch Cascade
+  // 7. Email Dispatch
   let emailSent = false;
   let emailErrorMsg = '';
 
@@ -117,14 +174,29 @@ export async function POST(request: Request) {
     to: toAlertEmail,
     subject: `New Contact Inquiry: ${subject || 'No Subject'}`,
     html: `
-      <h2>New Contact Inquiry from Website</h2>
-      <p><strong>Name:</strong> ${name}</p>
-      <p><strong>Email:</strong> ${email}</p>
-      <p><strong>Phone:</strong> ${number || 'N/A'}</p>
-      <p><strong>Subject:</strong> ${subject || 'N/A'}</p>
-      <br/>
-      <p><strong>Message:</strong></p>
-      <p>${message.replace(/\n/g, '<br/>')}</p>
+      <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: #1e293b; max-width: 600px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; background-color: #ffffff;">
+        <div style="background-color: #0b1530; padding: 24px 20px; text-align: center;">
+          <a href="https://ssquad.com" target="_blank" style="display: inline-block; text-decoration: none;">
+            <img src="https://ssquad.com/images/logon.png" alt="Ssquad Global" width="140" height="54" style="height: 38px; width: auto; max-width: 170px; display: block; margin: 0 auto; border: 0;" />
+          </a>
+        </div>
+        <div style="padding: 28px 24px;">
+          <h2 style="color: #0b1530; font-size: 20px; margin-top: 0; margin-bottom: 16px;">New Contact Inquiry from Website</h2>
+          <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+            <tr><td style="padding: 6px 0; color: #64748b; width: 90px;"><strong>Name:</strong></td><td style="padding: 6px 0; color: #0f172a; font-weight: 600;">${name}</td></tr>
+            <tr><td style="padding: 6px 0; color: #64748b;"><strong>Email:</strong></td><td style="padding: 6px 0; color: #0f172a;"><a href="mailto:${email}" style="color: #ec2024; text-decoration: none;">${email}</a></td></tr>
+            <tr><td style="padding: 6px 0; color: #64748b;"><strong>Phone:</strong></td><td style="padding: 6px 0; color: #0f172a;">${number || 'N/A'}</td></tr>
+            <tr><td style="padding: 6px 0; color: #64748b;"><strong>Subject:</strong></td><td style="padding: 6px 0; color: #0f172a;">${subject || 'N/A'}</td></tr>
+          </table>
+          <div style="margin-top: 16px; padding: 14px; background-color: #f8fafc; border-left: 3px solid #ec2024; border-radius: 4px;">
+            <p style="margin: 0 0 6px 0; font-size: 12px; text-transform: uppercase; font-weight: bold; color: #64748b;">Message / Requirements:</p>
+            <p style="margin: 0; font-size: 14px; line-height: 1.6; color: #1e293b;">${message.replace(/\n/g, '<br/>')}</p>
+          </div>
+        </div>
+        <div style="background-color: #f8fafc; padding: 14px; text-align: center; border-top: 1px solid #e2e8f0;">
+          <p style="font-size: 11px; color: #64748b; margin: 0;">Automated notification from Ssquad Global website inquiry portal.</p>
+        </div>
+      </div>
     `,
   };
 
@@ -133,19 +205,21 @@ export async function POST(request: Request) {
     to: email,
     subject: `Thank you for contacting Ssquad Global`,
     html: `
-      <div style="font-family: Arial, sans-serif; color: #333; max-width: 600px; margin: 0 auto; border: 1px solid #eee; border-radius: 8px; overflow: hidden;">
-        <div style="background-color: #0f172a; padding: 24px; text-align: center;">
-          <h2 style="color: #ffffff; margin: 0; font-size: 24px;">Ssquad Global</h2>
+      <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: #1e293b; max-width: 600px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; background-color: #ffffff;">
+        <div style="background-color: #0b1530; padding: 28px 20px; text-align: center;">
+          <a href="https://ssquad.com" target="_blank" style="display: inline-block; text-decoration: none;">
+            <img src="https://ssquad.com/images/logon.png" alt="Ssquad Global" width="140" height="54" style="height: 42px; width: auto; max-width: 180px; display: block; margin: 0 auto; border: 0;" />
+          </a>
         </div>
-        <div style="padding: 32px 24px;">
-          <p style="font-size: 16px; line-height: 1.6;">Dear ${name},</p>
-          <p style="font-size: 16px; line-height: 1.6;">Thank you for getting in touch with us. We have successfully received your inquiry regarding <strong>"${subject || 'your message'}"</strong>.</p>
-          <p style="font-size: 16px; line-height: 1.6;">One of our global experts will review your request and get back to you shortly.</p>
+        <div style="padding: 32px 28px;">
+          <p style="font-size: 16px; line-height: 1.6; margin-top: 0; color: #0f172a;">Dear ${name},</p>
+          <p style="font-size: 15px; line-height: 1.6; color: #334155;">Thank you for getting in touch with us. We have successfully received your inquiry regarding <strong style="color: #0f172a;">"${subject || 'your message'}"</strong>.</p>
+          <p style="font-size: 15px; line-height: 1.6; color: #334155;">One of our global experts will review your request and get back to you shortly.</p>
           <br/>
-          <p style="font-size: 16px; line-height: 1.6; margin-bottom: 8px;">Best regards,</p>
-          <p style="font-size: 16px; font-weight: bold; margin-top: 0;">The Ssquad Global Team</p>
+          <p style="font-size: 15px; line-height: 1.6; margin-bottom: 6px; color: #475569;">Best regards,</p>
+          <p style="font-size: 15px; font-weight: bold; margin-top: 0; color: #0b1530;">The Ssquad Global Team</p>
         </div>
-        <div style="background-color: #f8fafc; padding: 16px; text-align: center; border-top: 1px solid #eee;">
+        <div style="background-color: #f8fafc; padding: 16px; text-align: center; border-top: 1px solid #e2e8f0;">
           <p style="font-size: 12px; color: #64748b; margin: 0;">&copy; ${new Date().getFullYear()} Ssquad Global. All rights reserved.</p>
         </div>
       </div>
@@ -164,7 +238,7 @@ export async function POST(request: Request) {
           user: process.env.SMTP_USER,
           pass: process.env.SMTP_PASS,
         },
-        connectionTimeout: 8000, // Fail fast to try next fallback
+        connectionTimeout: 8000,
       });
       await transporter.sendMail(mailOptions);
       try {

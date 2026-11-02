@@ -229,7 +229,7 @@ export default function AppServiceHeader({ title, subtitle, breadcrumbs, theme =
   }, []);
 
   return (
-    <div ref={containerRef} className="hero relative overflow-hidden pt-44 pb-20 lg:pt-52 lg:pb-28 bg-ssg-dark">
+    <div ref={containerRef} className="hero relative overflow-hidden pt-32 sm:pt-40 md:pt-44 lg:pt-52 pb-14 sm:pb-20 lg:pb-28 bg-ssg-dark">
       {/* Background Image Texture */}
       <div 
         className="absolute inset-0 z-0 bg-cover bg-center"
@@ -254,48 +254,48 @@ export default function AppServiceHeader({ title, subtitle, breadcrumbs, theme =
         style={{ cursor: 'crosshair' }}
       ></canvas>
 
-      <div className="max-w-container mx-auto px-6 lg:px-8 relative z-10 text-center pointer-events-none">
+      <div className="max-w-container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center pointer-events-none">
         
         {breadcrumbs && breadcrumbs.length > 0 && (
-          <nav className="flex justify-center items-center gap-2 mb-6 opacity-90 pointer-events-auto">
+          <nav className="flex flex-wrap justify-center items-center gap-x-2 gap-y-1.5 mb-5 sm:mb-6 opacity-90 pointer-events-auto">
              {breadcrumbs.map((crumb, idx) => (
-                <div key={idx} className="flex items-center gap-2 text-sm text-ssg-grayLight font-mono">
-                   {idx > 0 && <i className="ph ph-caret-right text-ssg-red text-[10px]"></i>}
-                   <Link href={crumb.href} className="hover:text-white transition-colors uppercase tracking-widest">{crumb.label}</Link>
+                <div key={idx} className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-ssg-grayLight font-mono">
+                   {idx > 0 && <i className="ph ph-caret-right text-ssg-red text-[9px] sm:text-[10px]"></i>}
+                   <Link href={crumb.href} className="hover:text-white transition-colors uppercase tracking-wider sm:tracking-widest">{crumb.label}</Link>
                 </div>
              ))}
           </nav>
         )}
 
         {/* Decrypting Headline */}
-        <div className="flex flex-col gap-3 min-h-[120px] md:min-h-0 items-center justify-center relative w-full overflow-hidden">
+        <div className="flex flex-col gap-2 sm:gap-3 min-h-[90px] md:min-h-0 items-center justify-center relative w-full overflow-hidden px-1 sm:px-2">
           {theme === 'cyber' && (
-            <span className="text-ssg-red/90 text-[0.65rem] sm:text-[0.85rem] md:text-xl block tracking-[0.2em] md:tracking-[0.3em] uppercase mb-1 font-heading">
+            <span className="text-ssg-red/90 text-[0.65rem] sm:text-[0.85rem] md:text-base lg:text-xl block tracking-[0.18em] sm:tracking-[0.25em] md:tracking-[0.3em] uppercase mb-1 font-heading">
               [ SECURE // PROTOCOL // ACTIVE ]
             </span>
           )}
-          <h1 className="text-white font-bold tracking-tight drop-shadow-lg overflow-visible leading-[1.1] tabular-nums text-4xl sm:text-5xl md:text-6xl lg:text-[4.5rem] text-balance">
+          <h1 className="text-white font-bold tracking-tight drop-shadow-lg overflow-visible leading-[1.15] tabular-nums text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-[4.25rem] text-balance">
             <DecryptingTitle text={title} theme={theme} />
           </h1>
         </div>
         
         {/* Terminal Subtitle Box */}
         {subtitle && (
-          <div className="mt-8 flex justify-center pointer-events-auto">
+          <div className="mt-6 sm:mt-8 flex justify-center pointer-events-auto px-1 sm:px-0">
             {theme === 'cyber' ? (
-              <div className="bg-[#0B0F19]/60 backdrop-blur-xl border border-ssg-cyber/30 rounded-xl py-3 flex items-start gap-4 max-w-3xl shadow-[0_0_30px_rgba(91,46,255,0.15)] relative overflow-hidden group hover:border-ssg-cyber/60 transition-colors duration-500 pl-5 pr-7">
+              <div className="bg-[#0B0F19]/75 backdrop-blur-xl border border-ssg-cyber/30 rounded-xl p-3.5 sm:py-3.5 sm:pl-5 sm:pr-7 flex items-start gap-3 sm:gap-4 max-w-3xl shadow-[0_0_30px_rgba(91,46,255,0.15)] relative overflow-hidden group hover:border-ssg-cyber/60 transition-colors duration-500">
                 
                 {/* Terminal glass reflection */}
                 <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent pointer-events-none"></div>
                 
-                <div className="bg-ssg-cyber/20 p-2 rounded-lg shrink-0 border border-ssg-cyber/30 relative shadow-[0_0_15px_rgba(91,46,255,0.4)]">
-                   <i className="ph ph-fill ph-terminal-window text-cyan-300 text-xl md:text-xl animate-pulse"></i>
+                <div className="bg-ssg-cyber/20 p-1.5 sm:p-2 rounded-lg shrink-0 border border-ssg-cyber/30 relative shadow-[0_0_15px_rgba(91,46,255,0.4)] mt-0.5">
+                   <i className="ph ph-fill ph-terminal-window text-cyan-300 text-lg sm:text-xl animate-pulse"></i>
                 </div>
                 
-                <div className="flex-1 text-justify font-mono mt-0.5 text-sm md:text-[0.95rem]">
+                <div className="flex-1 text-left sm:text-justify font-mono text-xs sm:text-sm md:text-[0.95rem]">
                   <p 
                     className="text-slate-300 leading-relaxed drop-shadow-sm font-medium"
-                    style={{ textAlign: 'justify', hyphens: 'auto', WebkitHyphens: 'auto', wordSpacing: '-0.5px' } as React.CSSProperties}
+                    style={{ hyphens: 'auto', WebkitHyphens: 'auto' } as React.CSSProperties}
                   >
                     <span className="text-cyan-400 font-bold mr-2"></span>
                     {subtitle}

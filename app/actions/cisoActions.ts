@@ -1,9 +1,11 @@
 "use server";
 
 import nodemailer from "nodemailer";
+import { evaluateSpamRules } from "@/app/lib/antiSpam";
 
 export async function submitCisoRsvp(formData: FormData) {
   try {
+    const honeypot = formData.get("_hp_website")?.toString() || "";
     const rsvp_status = formData.get("rsvp_status")?.toString() || "";
     const first_name = formData.get("first_name")?.toString() || "";
     const last_name = formData.get("last_name")?.toString() || "";
@@ -12,6 +14,19 @@ export async function submitCisoRsvp(formData: FormData) {
     const industry = formData.get("industry")?.toString() || "";
     const email = formData.get("email")?.toString() || "";
     const phone = formData.get("phone")?.toString() || "";
+
+    // Honeypot & Bot evaluation
+    const spamCheck = evaluateSpamRules({
+      name: `${first_name} ${last_name}`,
+      email,
+      message: `${company} ${designation}`,
+      honeypot,
+    });
+
+    if (spamCheck.isSpam) {
+      console.warn('[ANTI-SPAM CISO] Trapped bot submission:', { email, name: `${first_name} ${last_name}` });
+      return { success: true, message: "Registration successfully processed." };
+    }
 
     // Basic Validation
     if (!first_name || !last_name || !email || !rsvp_status) {

@@ -4,16 +4,16 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 
 // Layout tokens shared by every section on this page
-const CONTAINER = "max-w-[1184px] mx-auto px-6";
-const SECTION = "py-20 lg:py-24";
+const CONTAINER = "max-w-[1184px] mx-auto px-4 sm:px-6 lg:px-8";
+const SECTION = "py-12 sm:py-16 md:py-20 lg:py-24";
 const HEADING_FONT = "[font-family:var(--font-plus-jakarta),sans-serif]";
 const HERO_BG = "bg-[#0b1530] bg-[radial-gradient(ellipse_at_10%_100%,rgba(236,32,36,0.28),transparent_55%),radial-gradient(ellipse_at_95%_10%,rgba(37,99,235,0.35),transparent_55%)]";
 
 function SectionIntro({ title, intro, dark = false }: { title: string; intro?: string; dark?: boolean }) {
   return (
     <div className="reveal">
-      <h2 className={`text-3xl lg:text-[2rem] font-bold leading-tight ${dark ? 'text-white' : 'text-slate-900'}`}>{title}</h2>
-      {intro && <p className={`mt-4 text-base lg:text-lg leading-relaxed xl:text-justify ${dark ? 'text-slate-300' : 'text-slate-600'}`}>{intro}</p>}
+      <h2 className={`text-2xl sm:text-3xl lg:text-[2rem] font-bold leading-tight ${dark ? 'text-white' : 'text-slate-900'}`}>{title}</h2>
+      {intro && <p className={`mt-3 sm:mt-4 text-sm sm:text-base lg:text-lg leading-relaxed text-left ${dark ? 'text-slate-300' : 'text-slate-600'}`}>{intro}</p>}
     </div>
   );
 }
@@ -41,9 +41,16 @@ const challenges = [
   { icon: "ph-eye", title: "Limited Risk Visibility", description: "Keeping track of servers and security will be difficult over the time when business grows." }
 ];
 
-const consultingServices = [
+interface ConsultingService {
+  icon: string;
+  title: string;
+  description: string;
+  href?: string;
+}
+
+const consultingServices: ConsultingService[] = [
   { icon: "ph-check-square", title: "Regulatory Compliance Consulting Services", description: "Ssquad Global works parallelly with your team to provide comprehensive SOC 2 readiness support, ISO 27001 certification support, and PCI-DSS compliance services support for your applications and IT infrastructure." },
-  { icon: "ph-chart-bar", title: "Enterprise Risk Management Consulting Services", description: "Our Enterprise Risk Management Consulting Services focus on identifying, examining, and managing cybersecurity and technology risks that could affect your organisation." },
+  { icon: "ph-chart-bar", title: "Enterprise Risk Management Services", description: "Our Enterprise Risk Management Services focus on identifying, examining, and managing cybersecurity and technology risks that could affect your organisation.", href: "/services/grc-services/enterprise-risk-management" },
   { icon: "ph-compass", title: "Evaluating Your Baseline", description: "Our GRC Consulting team examines each and every part of the existing security system and IT infrastructure and ongoing processes of development/\u200Bdeployment so we identify operational blind spots. This helps your core team understand where things stand before making changes." },
   { icon: "ph-note-pencil", title: "Updating Enterprise Risk Management Internal Policies", description: "Policies that are outdated can create confusion between documented procedures and daily operations. So we pitch and fix it up." },
   { icon: "ph-target", title: "Targeting Real Risks", description: "Every vulnerability carries a different level. We examine your cloud environments, networks, and applications security to highlight security weaknesses that need attention." },
@@ -96,12 +103,18 @@ const faqs = [
   { question: "Does Ssquad Global support RMiT and MAS TRM requirements?", answer: ["Yes. Ssquad Global supports financial institutions with technology with enterprise GRC, risk assessments, control reviews, gap identification, and regulatory alignment activities related to Bank Negara Malaysia RMiT and MAS TRM guidelines."] }
 ];
 
-const inputClass = "w-full bg-white text-slate-900 border border-slate-300 rounded-lg px-4 py-3 outline-none transition-all placeholder:text-slate-400 focus:border-ssg-red focus:ring-4 focus:ring-red-500/10";
+const inputClass = "w-full bg-white text-slate-900 border border-slate-300 rounded-lg px-3.5 sm:px-4 py-3 sm:py-3.5 outline-none transition-all placeholder:text-slate-400 focus:border-ssg-red focus:ring-4 focus:ring-red-500/10 text-[16px] sm:text-sm";
 
 function ConsultationForm() {
   const [form, setForm] = useState({ fname: '', wemail: '', cname: '', pnumber: '', cmessage: '', terms: false });
+  const [honeypot, setHoneypot] = useState('');
+  const [formLoadedAt, setFormLoadedAt] = useState<number>(() => Date.now());
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [message, setMessage] = useState('');
+
+  useEffect(() => {
+    setFormLoadedAt(Date.now());
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { id, value, type } = e.target;
@@ -122,7 +135,9 @@ function ConsultationForm() {
           email: form.wemail,
           number: form.pnumber,
           subject: `GRC Consultation Request - ${form.cname}`,
-          message: `Company: ${form.cname}\n\nRequirements:\n${form.cmessage}`
+          message: `Company: ${form.cname}\n\nRequirements:\n${form.cmessage}`,
+          _hp_company: honeypot,
+          _ts: formLoadedAt,
         })
       });
       const data = await res.json();
@@ -138,7 +153,19 @@ function ConsultationForm() {
   };
 
   return (
-    <form id="grc-consultation" onSubmit={handleSubmit} autoComplete="off" className="reveal scroll-mt-28 h-full flex flex-col gap-3 bg-white rounded-2xl shadow-2xl p-6 sm:p-8">
+    <form id="grc-consultation" onSubmit={handleSubmit} autoComplete="off" className="reveal scroll-mt-28 h-full flex flex-col justify-between gap-3 sm:gap-3.5 bg-white rounded-2xl shadow-2xl p-5 sm:p-8">
+      {/* Invisible Honeypot Trap for Automated Spambots */}
+      <div style={{ display: 'none', opacity: 0, position: 'absolute', left: '-9999px', height: 0, width: 0, zIndex: -1 }} aria-hidden="true">
+        <label htmlFor="_hp_company_grc">Company Website</label>
+        <input
+          id="_hp_company_grc"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+          value={honeypot}
+          onChange={(e) => setHoneypot(e.target.value)}
+        />
+      </div>
       <div className="grid sm:grid-cols-2 gap-3">
         <input id="fname" type="text" required value={form.fname} onChange={handleChange} placeholder="Full name *" aria-label="Full name" autoComplete="new-password" className={inputClass} />
         <input id="wemail" type="email" required value={form.wemail} onChange={handleChange} placeholder="Email *" aria-label="Email" autoComplete="new-password" className={inputClass} />
@@ -147,27 +174,27 @@ function ConsultationForm() {
         <input id="cname" type="text" required value={form.cname} onChange={handleChange} placeholder="Company *" aria-label="Company" autoComplete="new-password" className={inputClass} />
         <input id="pnumber" type="tel" value={form.pnumber} onChange={handleChange} placeholder="Phone" aria-label="Phone" autoComplete="new-password" className={inputClass} />
       </div>
-      <textarea id="cmessage" required value={form.cmessage} onChange={handleChange} placeholder="Requirements *" aria-label="Requirements" autoComplete="new-password" className={`${inputClass} resize-none flex-1 min-h-[9rem]`}></textarea>
+      <textarea id="cmessage" required value={form.cmessage} onChange={handleChange} placeholder="Requirements *" aria-label="Requirements" autoComplete="new-password" className={`${inputClass} resize-none flex-1 min-h-[7.5rem] sm:min-h-[9rem]`}></textarea>
 
-      <div className="flex items-start gap-3 px-1 pt-1">
-        <input type="checkbox" id="terms" required checked={form.terms} onChange={handleChange} className="mt-1 w-4 h-4 rounded border-slate-300 accent-ssg-red cursor-pointer" />
-        <label htmlFor="terms" className="text-slate-500 text-sm cursor-pointer leading-relaxed">
+      <div className="flex items-start gap-2.5 px-0.5 pt-0.5">
+        <input type="checkbox" id="terms" required checked={form.terms} onChange={handleChange} className="mt-1 w-4 h-4 rounded border-slate-300 accent-ssg-red cursor-pointer shrink-0" />
+        <label htmlFor="terms" className="text-slate-500 text-xs sm:text-sm cursor-pointer leading-relaxed">
           I accept the <Link href="/terms" className="text-slate-700 hover:text-ssg-red font-semibold transition-colors underline decoration-slate-200 underline-offset-4">Terms of Service</Link> and <Link href="/privacy" className="text-slate-700 hover:text-ssg-red font-semibold transition-colors underline decoration-slate-200 underline-offset-4">Privacy Framework</Link>.
         </label>
       </div>
 
       {status === 'success' && (
-        <div className="p-3.5 rounded-lg bg-green-50 border border-green-200 text-green-700 flex items-center gap-2.5 text-sm font-medium">
-          <i className="ph-fill ph-check-circle text-lg"></i>{message}
+        <div className="p-3.5 rounded-lg bg-green-50 border border-green-200 text-green-700 flex items-center gap-2.5 text-xs sm:text-sm font-medium">
+          <i className="ph-fill ph-check-circle text-lg shrink-0"></i><span>{message}</span>
         </div>
       )}
       {status === 'error' && (
-        <div className="p-3.5 rounded-lg bg-red-50 border border-red-200 text-red-700 flex items-center gap-2.5 text-sm font-medium">
-          <i className="ph-fill ph-warning-circle text-lg"></i>{message}
+        <div className="p-3.5 rounded-lg bg-red-50 border border-red-200 text-red-700 flex items-center gap-2.5 text-xs sm:text-sm font-medium">
+          <i className="ph-fill ph-warning-circle text-lg shrink-0"></i><span>{message}</span>
         </div>
       )}
 
-      <button type="submit" disabled={status === 'loading'} className="mt-2 w-full bg-ssg-red hover:bg-red-600 disabled:opacity-70 text-white font-semibold text-lg py-3.5 rounded-lg transition-colors">
+      <button type="submit" disabled={status === 'loading'} className="mt-1 sm:mt-2 w-full bg-ssg-red hover:bg-red-600 disabled:opacity-70 text-white font-semibold text-base sm:text-lg py-3 sm:py-3.5 rounded-xl transition-all shadow-lg hover:shadow-red-500/20 active:scale-[0.99]">
         {status === 'loading' ? 'Sending…' : 'Request a GRC Consultation'}
       </button>
     </form>
@@ -194,35 +221,35 @@ export default function GrcServicesPage() {
   return (
     <main className="bg-white">
       {/* Hero */}
-      <section className={`${HERO_BG} pt-36 pb-20 lg:pt-44 lg:pb-24`}>
-        <div className={`${CONTAINER} grid lg:grid-cols-[1fr_1fr] gap-12 lg:gap-14 items-stretch`}>
+      <section className={`${HERO_BG} pt-32 sm:pt-40 lg:pt-44 pb-14 sm:pb-20 lg:pb-24`}>
+        <div className={`${CONTAINER} grid lg:grid-cols-[1fr_1fr] gap-10 lg:gap-14 items-stretch`}>
           <div className="flex flex-col justify-center">
-            <h1 className="text-white text-4xl sm:text-5xl lg:text-[3.4rem] font-bold leading-[1.1] tracking-tight">
+            <h1 className="text-white text-3xl sm:text-4xl md:text-5xl lg:text-[3.4rem] font-bold leading-[1.15] tracking-tight">
               Governance, Risk &amp; Compliance <span className="text-[#ff6b78]">Services</span>
             </h1>
-            <p className="mt-6 text-slate-300 text-base leading-relaxed xl:text-justify">
+            <p className="mt-5 sm:mt-6 text-slate-300 text-sm sm:text-base leading-relaxed text-left">
               Worried about security gaps and changing compliance requirements? Ssquad Global helps review your business&apos;s security controls, identify IT infrastructure risks, and update internal Enterprise Risk policies. Our GRC consulting team works alongside yours to find practical solutions and improve compliance readiness.
             </p>
             <div className="mt-8 flex flex-col sm:flex-row gap-3">
-              <a href="#grc-consultation" className="inline-flex justify-center items-center bg-ssg-red hover:bg-red-600 text-white font-semibold px-6 py-3.5 rounded-md transition-colors">Request a GRC Consultation</a>
-              <a href="#grc-solutions" className="inline-flex justify-center items-center border border-white/50 hover:bg-white/10 text-white font-semibold px-6 py-3.5 rounded-md transition-colors">Discover our GRC solution</a>
+              <a href="#grc-consultation" className="inline-flex justify-center items-center bg-ssg-red hover:bg-red-600 text-white font-semibold text-sm sm:text-base px-6 py-3.5 rounded-xl transition-colors w-full sm:w-auto text-center shadow-lg hover:shadow-red-500/20 active:scale-[0.99]">Request a GRC Consultation</a>
+              <a href="#grc-solutions" className="inline-flex justify-center items-center border border-white/40 hover:bg-white/10 text-white font-semibold text-sm sm:text-base px-6 py-3.5 rounded-xl transition-colors w-full sm:w-auto text-center">Discover our GRC solution</a>
             </div>
           </div>
 
-          <div className="flex flex-col rounded-2xl border border-white/15 bg-white/[0.06] backdrop-blur-sm p-5 sm:p-6">
+          <div className="flex flex-col justify-between rounded-2xl border border-white/15 bg-white/[0.06] backdrop-blur-sm p-5 sm:p-6 lg:p-7">
             <p className="text-xs font-semibold tracking-[0.14em] uppercase text-slate-300">The three pillars of GRC</p>
-            <div className="mt-4 flex-1 flex flex-col justify-between gap-2.5">
+            <div className="mt-4 flex-1 flex flex-col justify-between gap-2.5 sm:gap-3">
               {pillars.map((pillar) => (
-                <div key={pillar.letter} className="flex items-center gap-4 rounded-xl border border-white/15 bg-white/[0.07] px-4 py-3">
+                <div key={pillar.letter} className="flex items-center gap-3.5 sm:gap-4 rounded-xl border border-white/15 bg-white/[0.07] px-4 py-3 sm:py-3.5">
                   <span className={`${pillar.color} w-10 h-10 rounded-lg text-white font-bold flex items-center justify-center shrink-0`}>{pillar.letter}</span>
                   <div>
-                    <p className={`${HEADING_FONT} text-white font-semibold`}>{pillar.title}</p>
-                    <p className="text-slate-300 text-[0.8125rem] leading-snug">{pillar.text}</p>
+                    <p className={`${HEADING_FONT} text-white font-semibold text-sm sm:text-base`}>{pillar.title}</p>
+                    <p className="text-slate-300 text-xs sm:text-[0.8125rem] leading-snug">{pillar.text}</p>
                   </div>
                 </div>
               ))}
             </div>
-            <div className="mt-4 pt-3 border-t border-white/10 flex flex-wrap gap-x-4 gap-y-1.5 text-[0.8125rem] font-semibold text-[#4ade80]">
+            <div className="mt-4 pt-3 border-t border-white/10 flex flex-wrap gap-x-4 gap-y-1.5 text-xs sm:text-[0.8125rem] font-semibold text-[#4ade80]">
               <span><i className="ph ph-check mr-1"></i>Practical, hands-on consulting</span>
               <span><i className="ph ph-check mr-1"></i>Audit-ready evidence</span>
             </div>
@@ -237,19 +264,21 @@ export default function GrcServicesPage() {
             title="Governance, Risk and Compliance Challenges We Help Address"
             intro="Security snags and compliance issues don't just appear out of nowhere. They stack up bit by bit while everyone is busy running the business."
           />
-          <p className={`reveal mt-6 inline-block bg-ssg-red/10 border border-ssg-red/20 text-ssg-red rounded-full px-5 py-2 ${HEADING_FONT} font-semibold`}>
+          <p className={`reveal mt-6 inline-block bg-ssg-red/10 border border-ssg-red/20 text-ssg-red rounded-full px-4 sm:px-5 py-2 text-xs sm:text-sm ${HEADING_FONT} font-semibold`}>
             Usually organizations security concerns are
           </p>
-          <ul className="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <ul className="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-5 items-stretch">
             {challenges.map((item) => (
-              <li key={item.title} className="reveal bg-white border border-slate-200 border-t-[3px] border-t-ssg-red rounded-xl p-5 hover:shadow-lg transition-shadow">
-                <IconTile icon={item.icon} />
-                <strong className={`mt-4 block ${HEADING_FONT} font-bold text-slate-900 text-[1.05rem] leading-snug`}>{item.title}</strong>
-                <p className="mt-2 text-slate-600 text-sm leading-relaxed xl:text-justify">{item.description}</p>
+              <li key={item.title} className="reveal bg-white border border-slate-200 border-t-[3px] border-t-ssg-red rounded-xl p-5 sm:p-6 hover:shadow-lg transition-shadow flex flex-col justify-between h-full">
+                <div>
+                  <IconTile icon={item.icon} />
+                  <strong className={`mt-4 block ${HEADING_FONT} font-bold text-slate-900 text-base sm:text-[1.05rem] leading-snug`}>{item.title}</strong>
+                  <p className="mt-2 text-slate-600 text-xs sm:text-sm leading-relaxed text-left">{item.description}</p>
+                </div>
               </li>
             ))}
           </ul>
-          <p className="reveal mt-10 rounded-xl border border-slate-200 border-l-4 border-l-ssg-red bg-slate-50 px-6 py-5 text-slate-700 text-base lg:text-lg leading-relaxed xl:text-justify">
+          <p className="reveal mt-8 sm:mt-10 rounded-xl border border-slate-200 border-l-4 border-l-ssg-red bg-slate-50 px-5 sm:px-6 py-4 sm:py-5 text-slate-700 text-sm sm:text-base lg:text-lg leading-relaxed text-left">
             Our expert GRC team communicates and helps in identifying these risks, reviewing existing systems, and prioritizing corrective actions so your business knows what needs fixing first.
           </p>
         </div>
@@ -262,26 +291,58 @@ export default function GrcServicesPage() {
             title="Our GRC Consulting Services"
             intro="Solid security begins with a clear view of your current setup. Ssquad Global's GRC Consulting Services connect compliance requirements with hands-on cybersecurity risk management to keep things practical."
           />
-          <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {consultingServices.map((item) => (
-              <div key={item.title} className="reveal bg-white border border-slate-200 border-t-[3px] border-t-[#2f6fde] rounded-xl p-5 hover:shadow-lg transition-shadow">
-                <IconTile icon={item.icon} />
-                <h3 className="mt-4 font-bold text-slate-900 text-[1.05rem] leading-snug">{item.title}</h3>
-                <p className="mt-2 text-slate-600 text-sm leading-relaxed xl:text-justify">{item.description}</p>
-              </div>
-            ))}
+          <div className="mt-8 sm:mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-5 items-stretch">
+            {consultingServices.map((item) => {
+              const cardBody = (
+                <div className="flex flex-col justify-between h-full">
+                  <div>
+                    <div className="flex items-center justify-between">
+                      <IconTile icon={item.icon} />
+                      {item.href && (
+                        <span className="text-xs font-semibold text-[#2f6fde] group-hover:text-ssg-red flex items-center gap-1 transition-colors">
+                          Explore <i className="ph ph-arrow-right"></i>
+                        </span>
+                      )}
+                    </div>
+                    <h3 className={`mt-4 font-bold text-slate-900 text-base sm:text-[1.05rem] leading-snug ${item.href ? 'group-hover:text-[#2f6fde] transition-colors' : ''}`}>{item.title}</h3>
+                    <p className="mt-2 text-slate-600 text-xs sm:text-sm leading-relaxed text-left">{item.description}</p>
+                  </div>
+                  {item.href && (
+                    <div className="mt-4 pt-3 border-t border-slate-100 flex items-center text-xs font-semibold text-[#2f6fde] group-hover:text-ssg-red transition-colors">
+                      Learn more about this service <i className="ph ph-arrow-right ml-1"></i>
+                    </div>
+                  )}
+                </div>
+              );
+
+              return item.href ? (
+                <Link
+                  key={item.title}
+                  href={item.href}
+                  className="reveal bg-white border border-slate-200 border-t-[3px] border-t-[#2f6fde] rounded-xl p-5 sm:p-6 hover:shadow-xl hover:border-slate-300 transition-all hover:-translate-y-1 block group h-full flex flex-col"
+                >
+                  {cardBody}
+                </Link>
+              ) : (
+                <div key={item.title} className="reveal bg-white border border-slate-200 border-t-[3px] border-t-[#2f6fde] rounded-xl p-5 sm:p-6 hover:shadow-lg transition-shadow h-full flex flex-col">
+                  {cardBody}
+                </div>
+              );
+            })}
           </div>
 
-          <p className={`reveal mt-12 ${HEADING_FONT} font-bold text-slate-900 text-lg`}>Our approach covers six important areas</p>
-          <ul className="mt-4 grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          <p className={`reveal mt-10 sm:mt-12 ${HEADING_FONT} font-bold text-slate-900 text-base sm:text-lg`}>Our approach covers six important areas</p>
+          <ul className="mt-4 grid sm:grid-cols-2 lg:grid-cols-3 gap-3 items-stretch">
             {riskAreas.map((area, idx) => (
-              <li key={area.title} className="reveal bg-white border border-slate-200 rounded-2xl px-5 py-4">
-                <p className="font-semibold text-slate-900"><span className="text-ssg-red mr-2">{idx + 1}</span>{area.title}</p>
-                <p className="mt-1.5 text-slate-600 text-sm leading-relaxed xl:text-justify">{area.description}</p>
+              <li key={area.title} className="reveal bg-white border border-slate-200 rounded-2xl px-5 py-4 flex flex-col justify-between h-full">
+                <div>
+                  <p className="font-semibold text-slate-900 text-sm sm:text-base"><span className="text-ssg-red mr-2">{idx + 1}</span>{area.title}</p>
+                  <p className="mt-1.5 text-slate-600 text-xs sm:text-sm leading-relaxed text-left">{area.description}</p>
+                </div>
               </li>
             ))}
           </ul>
-          <p className="reveal mt-6 rounded-xl border border-slate-200 border-l-4 border-l-ssg-red bg-white px-6 py-5 text-slate-700 text-base lg:text-lg leading-relaxed xl:text-justify">
+          <p className="reveal mt-6 rounded-xl border border-slate-200 border-l-4 border-l-ssg-red bg-white px-5 sm:px-6 py-4 sm:py-5 text-slate-700 text-sm sm:text-base lg:text-lg leading-relaxed text-left">
             This structured approach helps organisations focus their security efforts where it matters the most.
           </p>
         </div>
@@ -294,12 +355,14 @@ export default function GrcServicesPage() {
             title="Enterprise GRC Solutions"
             intro="Good governance works best when backed by reliable technology processes. Ssquad Global combines cybersecurity expertise with infrastructure capabilities to support practical Enterprise GRC Solutions."
           />
-          <div className="mt-10 grid md:grid-cols-2 gap-5">
+          <div className="mt-8 sm:mt-10 grid md:grid-cols-2 gap-5 items-stretch">
             {enterpriseSolutions.map((item) => (
-              <div key={item.title} className="reveal bg-white border border-slate-200 rounded-xl p-5 hover:shadow-lg transition-shadow">
-                <IconTile icon={item.icon} />
-                <h3 className="mt-4 font-bold text-slate-900 text-[1.05rem] leading-snug">{item.title}</h3>
-                <p className="mt-2 text-slate-600 text-sm leading-relaxed xl:text-justify">{item.description}</p>
+              <div key={item.title} className="reveal bg-white border border-slate-200 rounded-xl p-5 sm:p-6 hover:shadow-lg transition-shadow flex flex-col justify-between h-full">
+                <div>
+                  <IconTile icon={item.icon} />
+                  <h3 className="mt-4 font-bold text-slate-900 text-base sm:text-[1.05rem] leading-snug">{item.title}</h3>
+                  <p className="mt-2 text-slate-600 text-xs sm:text-sm leading-relaxed text-left">{item.description}</p>
+                </div>
               </div>
             ))}
           </div>
@@ -314,15 +377,15 @@ export default function GrcServicesPage() {
             title="Our GRC Consulting Approach"
             intro="Each and every business has different IT infrastructure, security risks, and regulatory responsibilities. Our process GRC Consulting begins by understanding those differences before recommending improvements."
           />
-          <ol className="mt-12">
+          <ol className="mt-10 sm:mt-12 space-y-8">
             {approachSteps.map((step, idx) => (
-              <li key={step.title} className="reveal relative grid grid-cols-[2.5rem_1fr] gap-x-5 lg:grid-cols-[2.5rem_17rem_1fr] lg:gap-x-8 pb-8 last:pb-0">
+              <li key={step.title} className="reveal relative grid grid-cols-[2.5rem_1fr] gap-x-4 sm:gap-x-5 lg:grid-cols-[2.5rem_17rem_1fr] lg:gap-x-8 pb-8 last:pb-0">
                 {idx < approachSteps.length - 1 && (
                   <span aria-hidden="true" className="absolute left-5 top-10 bottom-0 w-px bg-white/20"></span>
                 )}
-                <span aria-hidden="true" className="relative z-10 w-10 h-10 rounded-full bg-ssg-red text-white font-bold flex items-center justify-center">{idx + 1}</span>
-                <h3 className="pt-1.5 text-white font-semibold text-lg leading-snug"><span className="sr-only">{idx + 1}. </span>{step.title}</h3>
-                <p className="col-start-2 lg:col-start-3 mt-2 lg:mt-0 lg:pt-1.5 text-slate-300 text-sm leading-relaxed xl:text-justify">{step.description}</p>
+                <span aria-hidden="true" className="relative z-10 w-10 h-10 rounded-full bg-ssg-red text-white font-bold flex items-center justify-center shrink-0">{idx + 1}</span>
+                <h3 className="pt-1.5 text-white font-semibold text-base sm:text-lg leading-snug"><span className="sr-only">{idx + 1}. </span>{step.title}</h3>
+                <p className="col-start-2 lg:col-start-3 mt-2 lg:mt-0 lg:pt-1.5 text-slate-300 text-xs sm:text-sm leading-relaxed text-left">{step.description}</p>
               </li>
             ))}
           </ol>
@@ -336,13 +399,16 @@ export default function GrcServicesPage() {
             title="Industries We Support"
             intro="Ssquad Global GRC specialist guides business to address industry specific threats and problems, helps in maintaining IT-infrastructure, and enhances complex regulatory requirements."
           />
-          <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="mt-8 sm:mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-5 items-stretch">
             {industries.map((item) => (
-              <div key={item.title} className="reveal bg-white border border-slate-200 rounded-xl p-5 hover:shadow-lg transition-shadow">
-                <h3 className="flex items-center gap-2.5 font-bold text-slate-900 text-[1.05rem] leading-snug">
-                  <i className={`ph ${item.icon} text-xl text-[#1e3a8a]`}></i>{item.title}
-                </h3>
-                <p className="mt-2.5 text-slate-600 text-sm leading-relaxed xl:text-justify">{item.description}</p>
+              <div key={item.title} className="reveal bg-white border border-slate-200 rounded-xl p-5 sm:p-6 hover:shadow-lg transition-shadow flex flex-col justify-between h-full">
+                <div>
+                  <h3 className="flex items-center gap-2.5 font-bold text-slate-900 text-base sm:text-[1.05rem] leading-snug">
+                    <i className={`ph ${item.icon} text-xl text-[#1e3a8a] shrink-0`}></i>
+                    <span>{item.title}</span>
+                  </h3>
+                  <p className="mt-2.5 text-slate-600 text-xs sm:text-sm leading-relaxed text-left">{item.description}</p>
+                </div>
               </div>
             ))}
           </div>
@@ -356,11 +422,11 @@ export default function GrcServicesPage() {
             title="Why Choose Our GRC Consulting Services?"
             intro="Good GRC consulting requires more than understanding regulations. It also requires knowing how security controls work across real technology environments."
           />
-          <div className="mt-10 grid md:grid-cols-3 gap-5">
+          <div className="mt-8 sm:mt-10 grid md:grid-cols-3 gap-5 items-stretch">
             {whyChoose.map((item) => (
-              <div key={item.icon} className="reveal bg-white border border-slate-200 rounded-xl p-5 hover:shadow-lg transition-shadow">
+              <div key={item.icon} className="reveal bg-white border border-slate-200 rounded-xl p-5 sm:p-6 hover:shadow-lg transition-shadow flex flex-col h-full">
                 <IconTile icon={item.icon} />
-                <p className="mt-4 text-slate-600 text-sm leading-relaxed xl:text-justify">{item.text}</p>
+                <p className="mt-4 text-slate-600 text-xs sm:text-sm leading-relaxed text-left flex-1">{item.text}</p>
               </div>
             ))}
           </div>
@@ -369,18 +435,19 @@ export default function GrcServicesPage() {
 
       {/* FAQ */}
       <section className={`bg-white ${SECTION}`}>
-        <div className={`${CONTAINER} grid lg:grid-cols-[5fr_7fr] gap-10 lg:gap-16`}>
+        <div className={`${CONTAINER} grid lg:grid-cols-[5fr_7fr] gap-8 lg:gap-16`}>
           <div className="reveal">
-            <h2 className="text-3xl lg:text-[2rem] font-bold leading-tight text-slate-900">Frequently Asked Questions</h2>
+            <h2 className="text-2xl sm:text-3xl lg:text-[2rem] font-bold leading-tight text-slate-900">Frequently Asked Questions</h2>
+            <p className="mt-3 text-slate-600 text-sm sm:text-base">Everything you need to know about our Governance, Risk &amp; Compliance advisory.</p>
           </div>
           <div className="reveal">
             {faqs.map((faq, idx) => (
-              <details key={faq.question} open={idx === 0} className="group border-b border-slate-200">
-                <summary className="flex items-start gap-3 py-5 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
-                  <i className="ph-fill ph-caret-right mt-1 text-sm text-slate-900 transition-transform group-open:rotate-90"></i>
-                  <h3 className="font-semibold text-slate-900 text-lg leading-snug">{faq.question}</h3>
+              <details key={faq.question} open={idx === 0} className="group border-b border-slate-200 py-1">
+                <summary className="flex items-start gap-3 py-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+                  <i className="ph-fill ph-caret-right mt-1 text-sm text-slate-900 transition-transform group-open:rotate-90 shrink-0"></i>
+                  <h3 className="font-semibold text-slate-900 text-base sm:text-lg leading-snug">{faq.question}</h3>
                 </summary>
-                <div className="pb-5 pl-7 space-y-3 text-slate-600 leading-relaxed xl:text-justify">
+                <div className="pb-4 pl-6 sm:pl-7 space-y-3 text-slate-600 text-xs sm:text-sm leading-relaxed text-left">
                   {faq.answer.map((para) => <p key={para}>{para}</p>)}
                 </div>
               </details>
@@ -391,10 +458,10 @@ export default function GrcServicesPage() {
 
       {/* Discuss Requirements + Consultation Form */}
       <section className={`${HERO_BG} ${SECTION}`}>
-        <div className={`${CONTAINER} grid lg:grid-cols-2 gap-12 items-stretch`}>
-          <div className="reveal">
-            <h2 className="text-white text-3xl lg:text-[2rem] font-bold leading-tight">Discuss Your Governance, Risk and Compliance Requirements</h2>
-            <div className="mt-5 space-y-4 text-slate-300 text-base lg:text-lg leading-relaxed xl:text-justify">
+        <div className={`${CONTAINER} grid lg:grid-cols-2 gap-8 lg:gap-12 items-stretch`}>
+          <div className="reveal flex flex-col justify-center">
+            <h2 className="text-white text-2xl sm:text-3xl lg:text-[2rem] font-bold leading-tight">Discuss Your Governance, Risk and Compliance Requirements</h2>
+            <div className="mt-4 sm:mt-5 space-y-3 sm:space-y-4 text-slate-300 text-sm sm:text-base lg:text-lg leading-relaxed text-left">
               <p>Not sure whether your current security setup can handle new threats? Are you worried about risk or security concerns in your IT infrastructure or applications? Let&apos;s have an audit call with our team and let&apos;s find out what needs attention.</p>
               <p>Ssquad Global keeps things practical with cybersecurity risk assessments, governance reviews, regulatory guidance, and audit preparation support.</p>
               <p>Drop us a line to discuss your requirements.</p>

@@ -7,8 +7,15 @@ export default function ContactPage() {
   const [formData, setFormData] = useState({
     fname: '', wemail: '', pnumber: '', csubject: '', cmessage: '', terms: false
   });
+  const [honeypot, setHoneypot] = useState('');
+  const [formLoadedAt, setFormLoadedAt] = useState<number>(() => Date.now());
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
+
+  useEffect(() => {
+    // Record timestamp on mount to measure human submission duration
+    setFormLoadedAt(Date.now());
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { id, value, type } = e.target;
@@ -36,7 +43,9 @@ export default function ContactPage() {
         number: formData.pnumber,
         subject: formData.csubject,
         message: formData.cmessage,
-        terms: formData.terms
+        terms: formData.terms,
+        _hp_company: honeypot,
+        _ts: formLoadedAt,
       };
 
       const res = await fetch('/api/contact', {
@@ -154,6 +163,19 @@ export default function ContactPage() {
                 <h3 className="text-2xl font-bold text-slate-900 mb-8 tracking-tight">Direct Transmission</h3>
                 
                 <form className="space-y-6 relative z-10" onSubmit={handleSubmit} autoComplete="off">
+                  {/* Invisible Honeypot Trap for Automated Spambots */}
+                  <div style={{ display: 'none', opacity: 0, position: 'absolute', left: '-9999px', height: 0, width: 0, zIndex: -1 }} aria-hidden="true">
+                    <label htmlFor="_hp_company">Company Website</label>
+                    <input
+                      id="_hp_company"
+                      type="text"
+                      tabIndex={-1}
+                      autoComplete="off"
+                      value={honeypot}
+                      onChange={(e) => setHoneypot(e.target.value)}
+                    />
+                  </div>
+
                   <div className="grid md:grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <label htmlFor="fname" className="text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">Full Name *</label>
