@@ -46,55 +46,30 @@ const strategicServices = [
     icon: "ph-magnifying-glass-plus",
     title: "Enterprise Risk Assessment",
     description: "Our expert team of enterprise risk assessment will approach and identify vulnerabilities across IT infrastructure, cloud platforms, production applications, and security controls to determine potential operational threats.",
-    points: [
-      "Checks across your IT systems and cloud platforms",
-      "Security review of web, mobile and API applications",
-      "Comparison with international security controls"
-    ],
     tag: "DISCOVERY & AUDIT"
   },
   {
     icon: "ph-tree-structure",
     title: "Enterprise Risk Management Framework",
     description: "We support organisations to develop their own systematic Enterprise Risk Management framework to identify risk and evaluate accountability aligned with business priorities.",
-    points: [
-      "Risk categories and limits set for your business",
-      "Clear owners for each risk",
-      "Regular risk reports for your leadership"
-    ],
     tag: "GOVERNANCE MODEL"
   },
   {
     icon: "ph-arrows-clockwise",
     title: "Enterprise Risk Assessment Process",
     description: "Our system for enterprise risk assessment flows examines potential risks, evaluates their impact, and prioritizes appropriate risk treatment measures.",
-    points: [
-      "A simple way to classify each threat",
-      "Scoring by financial and operational impact",
-      "A clear plan to treat each risk"
-    ],
     tag: "WORKFLOW & PROCESS"
   },
   {
     icon: "ph-lock-key",
     title: "Cybersecurity Risk Management",
     description: "We identify security visibility through threat management, vulnerability intelligence and priority recommendations for fixes.",
-    points: [
-      "Review of where your systems can be attacked",
-      "Checks on how likely each weakness is to be used",
-      "Fix steps your engineers can follow"
-    ],
     tag: "DEFENSE VISIBILITY"
   },
   {
     icon: "ph-bank",
     title: "Regulatory Risk and Governance",
     description: "We have a track record of handling infrastructure for financial and banking systems with RMiT requirements and MAS Technology Risk Management governance guidelines.",
-    points: [
-      "Bank Negara Malaysia RMiT gap review and fixes",
-      "Support with MAS TRM guidelines",
-      "Support for ISO 27001, SOC 2 Type II and PCI-DSS 4.0"
-    ],
     tag: "CENTRAL BANK COMPLIANT"
   }
 ];
@@ -373,14 +348,6 @@ export default function EnterpriseRiskManagementPage() {
                     {service.description}
                   </p>
 
-                  <ul className="mt-5 space-y-2.5 pt-4 border-t border-slate-100">
-                    {service.points.map((pt, pIdx) => (
-                      <li key={pIdx} className="flex items-start gap-2 text-xs sm:text-[13px] text-slate-700 leading-snug">
-                        <i className="ph-bold ph-check text-emerald-600 mt-0.5 shrink-0"></i>
-                        <span>{pt}</span>
-                      </li>
-                    ))}
-                  </ul>
                 </div>
 
                 <div className="mt-6 pt-3 border-t border-slate-100">
