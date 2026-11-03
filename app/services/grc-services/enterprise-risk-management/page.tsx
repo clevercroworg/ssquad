@@ -16,7 +16,6 @@ const challenges = [
     tag: "UNSEEN VULNERABILITIES",
     title: "Cybersecurity Risks",
     quote: "The actual issue is not the threats we know, but the threats in our systems that remain unidentified.",
-    description: "Weak spots often sit in old systems, forgotten connections or settings that changed over time. Regular security tools can miss these, and attackers look for exactly this kind of gap.",
     accent: "border-t-[#EC2024]",
     tagBg: "bg-red-50 text-[#EC2024] border-red-200"
   },
@@ -25,7 +24,6 @@ const challenges = [
     tag: "CASCADING DOWNTIME",
     title: "Operational Disruptions",
     quote: "When important applications stop working or infrastructure fails unexpectedly, daily business activities may be interrupted, affecting employees, customers, and service delivery.",
-    description: "Many business systems depend on each other and on outside vendors. If one of them fails, the problem can spread to other teams and affect your revenue and your customers.",
     accent: "border-t-[#F59E0B]",
     tagBg: "bg-amber-50 text-[#D97706] border-amber-200"
   },
@@ -34,7 +32,6 @@ const challenges = [
     tag: "REGULATORY COMPLIANCE",
     title: "Regulatory Compliance",
     quote: "As our systems continue to grow, it becomes increasingly difficult to maintain compliance with governance rules and audit requirements.",
-    description: "Regulators expect proof that your controls work all year, not only at audit time. This applies to standards such as RMiT, MAS TRM, ISO 27001 and SOC 2.",
     accent: "border-t-[#0284C7]",
     tagBg: "bg-blue-50 text-[#0284C7] border-blue-200"
   }
@@ -291,9 +288,6 @@ export default function EnterpriseRiskManagementPage() {
                     &ldquo;{c.quote}&rdquo;
                   </div>
 
-                  <p className="mt-3.5 text-slate-600 text-xs sm:text-sm leading-relaxed text-left">
-                    {c.description}
-                  </p>
                 </div>
 
                 <div className="mt-6 pt-4 border-t border-slate-200 flex items-center justify-between text-xs font-semibold text-slate-500">
