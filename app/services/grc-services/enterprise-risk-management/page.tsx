@@ -104,32 +104,27 @@ const approachSteps = [
   {
     number: "01",
     title: "Identify Risks",
-    description: "Examine business activities, identify the gaps, and find the potential threats across the system.",
-    detail: "We cover cloud systems, on-site infrastructure, SaaS tools and developer workflows."
+    description: "Examine business activities, identify the gaps, and find the potential threats across the system."
   },
   {
     number: "02",
     title: "Examine Impact",
-    description: "Our Enterprise Risk Management expert team evaluate operational consequences, security exposure, and business dependencies.",
-    detail: "We check how each issue could affect customer services and finances."
+    description: "Our Enterprise Risk Management expert team evaluate operational consequences, security exposure, and business dependencies."
   },
   {
     number: "03",
     title: "Prioritise Risks",
-    description: "Classifying risks according to their potential impact and organizational priorities.",
-    detail: "Serious risks are separated from minor ones, so leadership sees what matters."
+    description: "Classifying risks according to their potential impact and organizational priorities."
   },
   {
     number: "04",
     title: "Recommend Controls",
-    description: "Develop practical mitigation recommendations and governance improvements.",
-    detail: "You get clear fix steps, policy changes and advice on strengthening your systems."
+    description: "Develop practical mitigation recommendations and governance improvements."
   },
   {
     number: "05",
     title: "Review Risk Posture",
-    description: "Support ongoing risk visibility through reporting and periodic assessments.",
-    detail: "We review progress and share reports your leadership and auditors can use."
+    description: "Support ongoing risk visibility through reporting and periodic assessments."
   }
 ];
 
@@ -470,9 +465,6 @@ export default function EnterpriseRiskManagementPage() {
                   </p>
                 </div>
 
-                <div className="mt-5 pt-3.5 border-t border-white/10 text-[11px] text-slate-400 leading-normal">
-                  {step.detail}
-                </div>
               </div>
             ))}
           </div>
